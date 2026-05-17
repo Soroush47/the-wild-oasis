@@ -13,3 +13,7 @@ export async function getCabins() {
 
     return api.get("/cabins");
 }
+
+export async function deleteCabin(id: number) {
+    return api.delete(`/cabins/${id}`);
+}

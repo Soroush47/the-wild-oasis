@@ -12,10 +12,12 @@ import PageNotFound from "./pages/PageNotFound";
 import AppLayout from "./ui/AppLayout";
 import GlobalStyles from "./styles/GlobalStyles";
 
+const MINUTE = 60 * 1000;
+
 const queryClient = new QueryClient({
     defaultOptions: {
         queries: {
-            staleTime: 60 * 1000,
+            staleTime: 1 * MINUTE,
         },
     },
 });
