@@ -21,6 +21,16 @@
       "image": "/src/data/cabins/cabin-002.jpg"
     },
     {
+      "id": "3",
+      "createdAt": "2026/05/17 10:00",
+      "name": "003",
+      "maxCapacity": 5,
+      "regularPrice": 400,
+      "discount": 75,
+      "description": "test",
+      "image": "/src/data/cabins/cabin-003.jpg"
+    },
+    {
       "id": "4",
       "createdAt": "2026/05/17 10:00",
       "name": "004",
@@ -29,6 +39,44 @@
       "discount": 75,
       "description": "test",
       "image": "/src/data/cabins/cabin-004.jpg"
+    },
+    {
+      "name": "Chaloos",
+      "maxCapacity": "4",
+      "regularPrice": "500",
+      "discount": "20",
+      "description": "dsfdsfsdfsd\n",
+      "image": "/src/data/cabins/cabin-001.jpg",
+      "id": "qkAhKUNPz_A"
+    },
+    {
+      "name": "Behesht",
+      "maxCapacity": "6",
+      "regularPrice": "300",
+      "discount": "0",
+      "description": "test 2",
+      "image": "/src/data/cabins/cabin-002.jpg",
+      "id": "lpqwOlcxHEE"
+    },
+    {
+      "name": "hello",
+      "maxCapacity": "5",
+      "regularPrice": "420",
+      "discount": "40",
+      "description": "fsadfsd",
+      "image": "/src/data/cabins/cabin-003.jpg",
+      "createdAt": "26/02/19 00:02:47",
+      "id": "i7uKUpFa-f8"
+    },
+    {
+      "name": "dadas",
+      "maxCapacity": "234234",
+      "regularPrice": "423",
+      "discount": "2342",
+      "description": "wqerweqfw",
+      "image": "/src/data/cabins/cabin-001.jpg",
+      "createdAt": "26/28/19 00:28:11",
+      "id": "O25X3nYW18s"
     }
   ],
   "guests": [

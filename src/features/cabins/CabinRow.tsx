@@ -65,7 +65,7 @@ function CabinRow({ cabin }: CabinRowProps) {
         maxCapacity,
         regularPrice,
         discount,
-        description,
+        // description,
         image,
     } = cabin;
 
@@ -82,7 +82,7 @@ function CabinRow({ cabin }: CabinRowProps) {
         onError: () => toast.error("Cabin could not be deleted"),
     });
 
-    console.log(description);
+    // console.log(description);
     return (
         <TableRow role="row">
             <Img src={image} />
