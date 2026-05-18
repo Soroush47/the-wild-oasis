@@ -37,11 +37,11 @@ function CabinTable() {
     });
     const cabins = data?.data;
 
-    console.log({ cabins, isLoading });
+    console.log({ cabins, isLoading, error });
 
     if (isLoading) return <Spinner />;
 
-    if (error) return <div>error: {error}</div>;
+    // if (error) return <div>error: {JSON.stringify(error)}</div>;
 
     return (
         <Table role="table">
