@@ -1,0 +1,82 @@
+{
+    "cabins": [
+        {
+            "id": 1,
+            "createdAt": "2026/05/15 13:00",
+            "name": "001",
+            "maxCapacity": 2,
+            "regularPrice": 250,
+            "discount": 50,
+            "description": "Small luxury cabin in the woods",
+            "image": "/src/data/cabins/cabin-001.jpg"
+        },
+        {
+            "id": 2,
+            "createdAt": "2026/05/16 18:00",
+            "name": "002",
+            "maxCapacity": 4,
+            "regularPrice": 400,
+            "discount": 75,
+            "description": "test",
+            "image": "/src/data/cabins/cabin-002.jpg"
+        },
+        {
+            "id": 3,
+            "createdAt": "2026/05/17 10:00",
+            "name": "003",
+            "maxCapacity": 5,
+            "regularPrice": 400,
+            "discount": 75,
+            "description": "test",
+            "image": "/src/data/cabins/cabin-003.jpg"
+        },
+        {
+            "id": 4,
+            "createdAt": "2026/05/17 10:00",
+            "name": "004",
+            "maxCapacity": 8,
+            "regularPrice": 400,
+            "discount": 75,
+            "description": "test",
+            "image": "/src/data/cabins/cabin-004.jpg"
+        }
+    ],
+    "guests": [
+        {
+            "id": 1,
+            "createdAt": "2026/05/15 13:00",
+            "fullName": "Soroush Ghasemi",
+            "email": "test@gmail.com",
+            "nationalID": "1234567899",
+            "nationality": "Persian",
+            "countryFlag": ""
+        }
+    ],
+
+    "settings": {
+        "minBookingLength": 3,
+        "maxBookingLength": 90,
+        "maxGuestsPerBooking": 8,
+        "breakfastPrice": 15
+    },
+
+    "bookings": [
+        {
+            "id": 1,
+            "createdAt": "2026/05/15 13:00",
+            "startDate": "2026/05/20 13:00",
+            "endDate": "2026/05/25 12:00",
+            "numNights": 5,
+            "numGuests": 2,
+            "cabinPrice": 300,
+            "extrasPrice": 120,
+            "totalPrice": 420,
+            "status": "unconfirmed",
+            "hasBreakfast": true,
+            "isPaid": true,
+            "observations": "I will arrive at 18:00",
+            "cabinId": 1,
+            "guestId": 1
+        }
+    ]
+}
