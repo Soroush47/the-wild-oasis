@@ -42,11 +42,11 @@
     },
     {
       "name": "Chaloos",
-      "maxCapacity": "4",
-      "regularPrice": "500",
-      "discount": "20",
-      "description": "dsfdsfsdfsd\n",
-      "image": "/src/data/cabins/cabin-001.jpg",
+      "maxCapacity": 5,
+      "regularPrice": 400,
+      "discount": 20,
+      "description": "dsfdsfsdfsd",
+      "image": "/src/data/cabins/empty2.png",
       "id": "qkAhKUNPz_A"
     },
     {
@@ -69,14 +69,84 @@
       "id": "i7uKUpFa-f8"
     },
     {
-      "name": "dadas",
-      "maxCapacity": "234234",
-      "regularPrice": "423",
-      "discount": "2342",
-      "description": "wqerweqfw",
+      "name": "sgdg",
+      "maxCapacity": 2,
+      "regularPrice": 5,
+      "discount": 4,
+      "description": "fdgdg",
       "image": "/src/data/cabins/cabin-001.jpg",
-      "createdAt": "26/28/19 00:28:11",
-      "id": "O25X3nYW18s"
+      "createdAt": "26/34/19 10:34:10",
+      "id": "a3e00uhGjVc"
+    },
+    {
+      "name": "Sadaf",
+      "maxCapacity": 4,
+      "regularPrice": 800,
+      "discount": 70,
+      "description": "asdasd",
+      "image": "/src/data/cabins/cabin-001.jpg",
+      "createdAt": "26/49/19 10:49:21",
+      "id": "ThR94UPIwcw"
+    },
+    {
+      "name": "Aseman",
+      "maxCapacity": 23,
+      "regularPrice": 2342,
+      "discount": 2323,
+      "description": "sdf",
+      "image": "/src/data/cabins/cabin-001.jpg",
+      "createdAt": "26/11/19 11:11:33",
+      "id": "nMkwAKmvqb0"
+    },
+    {
+      "name": "dsfgdg",
+      "maxCapacity": 345,
+      "regularPrice": 324543,
+      "discount": 0,
+      "description": "fsdsdf",
+      "image": "/src/data/cabins/cabin-001.jpg",
+      "createdAt": "26/11/19 11:11:47",
+      "id": "QcPHipJfgzE"
+    },
+    {
+      "name": "dfs",
+      "maxCapacity": 123,
+      "regularPrice": 213,
+      "discount": 0,
+      "description": "efd",
+      "image": "/src/data/cabins/cabin-001.jpg",
+      "createdAt": "26/17/19 11:17:20",
+      "id": "K5qirXjNF2k"
+    },
+    {
+      "name": "asfd",
+      "maxCapacity": 234,
+      "regularPrice": 234,
+      "discount": 0,
+      "description": "sff",
+      "image": "/src/data/cabins/empty.png",
+      "createdAt": "26/16/19 21:16:37",
+      "id": "baWOuvlXO0k"
+    },
+    {
+      "name": "sfdf",
+      "maxCapacity": 234,
+      "regularPrice": 235,
+      "discount": 23,
+      "description": "safdf",
+      "image": "/src/data/cabins/empty.png",
+      "createdAt": "26/26/19 21:26:03",
+      "id": "mPNx2sJoc9o"
+    },
+    {
+      "name": "Bahar",
+      "maxCapacity": 234,
+      "regularPrice": 34423,
+      "discount": 22,
+      "description": "dsfsfsdf",
+      "image": "/src/data/cabins/cabin-007.jpg",
+      "createdAt": "26/28/19 21:28:07",
+      "id": "HEm6SgluADk"
     }
   ],
   "guests": [

@@ -10,6 +10,7 @@ const sizes: Record<SizeVariant, RuleSet<object>> = {
         text-transform: uppercase;
         font-weight: 600;
         text-align: center;
+        max-width: 9rem;
     `,
     medium: css`
         font-size: 1.4rem;
@@ -53,7 +54,7 @@ const variations: Record<VariationVariant, RuleSet<object>> = {
 
 type ButtonProps = {
     size?: SizeVariant;
-    variation?: VariationVariant;
+    $variation?: VariationVariant; //Transient Props
 };
 
 const Button = styled.button<ButtonProps>`
@@ -62,7 +63,7 @@ const Button = styled.button<ButtonProps>`
     box-shadow: var(--shadow-sm);
 
     ${props => sizes[props.size ?? "medium"]}
-    ${props => variations[props.variation ?? "primary"]}
+    ${props => variations[props.$variation ?? "primary"]}
 `;
 
 // Button.defaultProps = {
