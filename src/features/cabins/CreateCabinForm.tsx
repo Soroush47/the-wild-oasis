@@ -10,7 +10,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import FormRow from "../../ui/FormRow";
 import React from "react";
 import { useCreateCabin } from "./useCreateCabin";
-import { useEditCabin } from "./useEditCabin";
+import { useUpdateCabin } from "./useUpdateCabin";
 
 // interface Cabin {
 //     name: string;
@@ -94,11 +94,11 @@ function CreateCabinForm({ cabin, setShowForm }: CreateCabinFormProps) {
     });
 
     const { isCreating, createMutation } = useCreateCabin();
-    const { isEditing, editMutation } = useEditCabin();
+    const { isUpdating, updateMutation } = useUpdateCabin();
 
     const onSubmit = (data: FormData) => {
         cabin
-            ? editMutation(
+            ? updateMutation(
                   {
                       ...data,
                       id: cabin.id,
@@ -124,13 +124,13 @@ function CreateCabinForm({ cabin, setShowForm }: CreateCabinFormProps) {
                     type="text"
                     id="name"
                     {...register("name")}
-                    disabled={cabin ? isEditing : isCreating}
+                    disabled={cabin ? isUpdating : isCreating}
                 />
             </FormRow>
 
             <FormRow label="Max capacity" error={errors?.maxCapacity?.message}>
                 <Input
-                    disabled={cabin ? isEditing : isCreating}
+                    disabled={cabin ? isUpdating : isCreating}
                     type="number"
                     id="maxCapacity"
                     {...register("maxCapacity", { valueAsNumber: true })}
@@ -139,7 +139,7 @@ function CreateCabinForm({ cabin, setShowForm }: CreateCabinFormProps) {
 
             <FormRow label="Regular price" error={errors?.regularPrice?.message}>
                 <Input
-                    disabled={cabin ? isEditing : isCreating}
+                    disabled={cabin ? isUpdating : isCreating}
                     type="number"
                     id="regularPrice"
                     {...register("regularPrice", { valueAsNumber: true })}
@@ -148,7 +148,7 @@ function CreateCabinForm({ cabin, setShowForm }: CreateCabinFormProps) {
 
             <FormRow label="Discount" error={errors?.discount?.message}>
                 <Input
-                    disabled={cabin ? isEditing : isCreating}
+                    disabled={cabin ? isUpdating : isCreating}
                     type="number"
                     id="discount"
                     // defaultValue={0}
@@ -170,7 +170,7 @@ function CreateCabinForm({ cabin, setShowForm }: CreateCabinFormProps) {
 
             <FormRow label="Cabin photo" error={errors?.image?.message}>
                 <FileInput
-                    disabled={cabin ? isEditing : isCreating}
+                    disabled={cabin ? isUpdating : isCreating}
                     id="image"
                     accept="image/*"
                     {...register("image")}
@@ -184,11 +184,11 @@ function CreateCabinForm({ cabin, setShowForm }: CreateCabinFormProps) {
                     $variation="secondary"
                     onClick={() => reset()}
                     type="button"
-                    disabled={cabin ? isEditing : isCreating}
+                    disabled={cabin ? isUpdating : isCreating}
                 >
                     Cancel
                 </Button>
-                <Button disabled={cabin ? isEditing : isCreating}>
+                <Button disabled={cabin ? isUpdating : isCreating}>
                     {cabin ? "Edit" : "Create new"} cabin
                 </Button>
             </FormRow>

@@ -193,7 +193,7 @@
   "settings": {
     "minBookingLength": 3,
     "maxBookingLength": 90,
-    "maxGuestsPerBooking": 8,
+    "maxGuestsPerBooking": 9,
     "breakfastPrice": 15
   },
   "bookings": [

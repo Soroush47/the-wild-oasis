@@ -46,7 +46,7 @@ export async function createCabin(cabin: Cabin) {
     return api.post("/cabins", newCabin);
 }
 
-export async function editCabin(cabin: Cabin) {
+export async function updateCabin(cabin: Cabin) {
     // const editedCabin = {
     //     ...cabin,
     //     image: `/src/data/cabins/${
