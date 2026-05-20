@@ -6,12 +6,11 @@ import Form from "../../ui/Form";
 import Button from "../../ui/Button";
 import FileInput from "../../ui/FileInput";
 import Textarea from "../../ui/Textarea";
-import { createCabin, editCabin } from "../../services/apiCabins";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import toast from "react-hot-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import FormRow from "../../ui/FormRow";
 import React from "react";
+import { useCreateCabin } from "./useCreateCabin";
+import { useEditCabin } from "./useEditCabin";
 
 // interface Cabin {
 //     name: string;
@@ -93,47 +92,30 @@ function CreateCabinForm({ cabin, setShowForm }: CreateCabinFormProps) {
                   image: undefined,
               },
     });
-    const queryClient = useQueryClient();
-    const { mutate, isPending: isCreating } = useMutation({
-        mutationFn: createCabin,
-        onSuccess: () => {
-            toast.success("New cabin created successfully");
-            queryClient.invalidateQueries({
-                queryKey: ["cabins"],
-            });
-            reset();
-        },
-        onError: () => toast.error("Cabin could not be created"),
-    });
 
-    const { mutate: editMutate, isPending: isEditing } = useMutation({
-        mutationFn: editCabin,
-        onSuccess: () => {
-            toast.success("The cabin edited succesfully");
-            queryClient.invalidateQueries({
-                queryKey: ["cabins"],
-            });
-            setShowForm?.(show => !show);
-        },
-        onError: () => toast.error("The cabin could not be edited"),
-    });
+    const { isCreating, createMutation } = useCreateCabin();
+    const { isEditing, editMutation } = useEditCabin();
 
     const onSubmit = (data: FormData) => {
-        // console.log(data);
-        // console.log(cabin);
         cabin
-            ? editMutate({
-                  ...data,
-                  id: cabin.id,
-                  image:
-                      data.image?.length && typeof data.image !== "string"
-                          ? `/src/data/cabins/${data.image.item(0)?.name}`
-                          : cabin.image,
-              })
-            : mutate(data);
+            ? editMutation(
+                  {
+                      ...data,
+                      id: cabin.id,
+                      image:
+                          data.image?.length && typeof data.image !== "string"
+                              ? `/src/data/cabins/${data.image.item(0)?.name}`
+                              : cabin.image,
+                  },
+                  { onSuccess: () => setShowForm?.(show => !show) },
+              )
+            : createMutation(data, {
+                  onSuccess: () => {
+                      reset();
+                      setShowForm?.(show => !show);
+                  },
+              });
     };
-
-    // console.log({ isCreating, errors });
 
     return (
         <Form onSubmit={handleSubmit(onSubmit)}>
@@ -179,7 +161,6 @@ function CreateCabinForm({ cabin, setShowForm }: CreateCabinFormProps) {
 
             <FormRow label="Description for website" error={errors?.description?.message}>
                 <Textarea
-                    disabled={cabin ? isEditing : isCreating}
                     // type="number"
                     id="description"
                     // defaultValue=""
