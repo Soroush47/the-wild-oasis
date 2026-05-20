@@ -5,6 +5,13 @@ import Input from "../../ui/Input";
 import Spinner from "../../ui/Spinner";
 import { useUpdateSetting } from "./useUpdateSetting";
 
+interface Settings {
+    minBookingLength: number;
+    maxBookingLength: number;
+    maxGuestsPerBooking: number;
+    breakfastPrice: number;
+}
+
 function UpdateSettingsForm() {
     const { isLoading, settings } = useSettings();
     const { isUpdating, updateMutation } = useUpdateSetting();
@@ -12,9 +19,17 @@ function UpdateSettingsForm() {
         settings ?? {};
 
     const handleUpdate = (e: React.FocusEvent<HTMLInputElement>) => {
-        const { value, name } = e.target;
+        type Name = keyof Settings;
+        const name = e.target.name as Name;
+        const value = e.target.value;
+        // const { value, name }: { value: string; name: Name } = e.target;
         if (!value || +value === settings[name]) return;
-        updateMutation({ [name]: +value });
+
+        // type Setting = {
+        //     [k in keyof Settings]: number;
+        // };
+        const setting: Partial<Settings> = { [name]: +value };
+        updateMutation(setting);
     };
 
     if (isLoading) return <Spinner />;

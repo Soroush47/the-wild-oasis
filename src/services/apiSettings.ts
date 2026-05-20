@@ -13,7 +13,20 @@ export async function getSettings() {
 }
 
 // We expect a newSetting object that looks like {setting: newValue}
-export async function updateSetting(newSetting) {
+
+interface Settings {
+    minBookingLength: number;
+    maxBookingLength: number;
+    maxGuestsPerBooking: number;
+    breakfastPrice: number;
+}
+// type Setting = keyof Settings;
+
+// type SettingEntry = {
+//     [K in Setting]: { [P in K]: Settings[P] };
+// }[keyof Settings];
+
+export async function updateSetting(setting: Partial<Settings>) {
     // const { data, error } = await supabase
     //     .from("settings")
     //     .update(newSetting)
@@ -26,5 +39,5 @@ export async function updateSetting(newSetting) {
     //     throw new Error("Settings could not be updated");
     // }
     // return data;
-    return api.patch("/settings", newSetting);
+    return api.patch("/settings", setting);
 }
