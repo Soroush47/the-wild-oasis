@@ -177,6 +177,16 @@
       "image": "/src/data/cabins//cabin-002.jpg",
       "createdAt": "26/23/20 11:23:31",
       "id": "6pPzBvst57Y"
+    },
+    {
+      "name": "dfasdsf",
+      "maxCapacity": 2342,
+      "regularPrice": 234,
+      "discount": 23,
+      "description": "fsdfsf",
+      "image": "/src/data/cabins/empty2.png",
+      "createdAt": "26/18/21 16:18:58",
+      "id": "5i3ABHcH4F8"
     }
   ],
   "guests": [

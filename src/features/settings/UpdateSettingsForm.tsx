@@ -22,12 +22,9 @@ function UpdateSettingsForm() {
         type Name = keyof Settings;
         const name = e.target.name as Name;
         const value = e.target.value;
-        // const { value, name }: { value: string; name: Name } = e.target;
+
         if (!value || +value === settings[name]) return;
 
-        // type Setting = {
-        //     [k in keyof Settings]: number;
-        // };
         const setting: Partial<Settings> = { [name]: +value };
         updateMutation(setting);
     };

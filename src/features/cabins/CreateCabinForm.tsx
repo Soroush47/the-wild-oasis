@@ -1,97 +1,25 @@
-import { useForm } from "react-hook-form";
-import z from "zod";
+import React from "react";
+
+import { useCreateCabin } from "./useCreateCabin";
+import { useUpdateCabin } from "./useUpdateCabin";
 
 import Input from "../../ui/Input";
 import Form from "../../ui/Form";
 import Button from "../../ui/Button";
 import FileInput from "../../ui/FileInput";
 import Textarea from "../../ui/Textarea";
-import { zodResolver } from "@hookform/resolvers/zod";
 import FormRow from "../../ui/FormRow";
-import React from "react";
-import { useCreateCabin } from "./useCreateCabin";
-import { useUpdateCabin } from "./useUpdateCabin";
-
-// interface Cabin {
-//     name: string;
-//     maxCapacity: number;
-//     regularPrice: number;
-//     discount: number;
-//     description: string;
-//     image: string;
-// }
-
-const createCabinFormSchema = z
-    .object({
-        name: z.string().trim().min(1, "Name is required"),
-        maxCapacity: z
-            .number({ error: "Capacity should be at least 1" })
-            .min(1, "Capacity should be at least 1"),
-        regularPrice: z
-            .number({ error: "Regular price should be at least 1$" })
-            .min(1, "Regular price should be at least 1$"),
-        discount: z.number().min(0),
-        description: z.string().trim().min(1, "Description is required"),
-        image: z
-            .instanceof(FileList)
-            .refine(() => 1 <= 2_000_000, "Max size is 2MB")
-            .optional()
-            .or(z.string()),
-    })
-    .superRefine((data, ctx) => {
-        if (data.discount >= data.regularPrice) {
-            ctx.addIssue({
-                code: "custom",
-                message: "Discount should be less than regular price",
-                path: ["discount"],
-            });
-        }
-    });
-
-export type FormData = z.infer<typeof createCabinFormSchema>;
-
-type CabinType = {
-    id: number;
-    createdAt: Date;
-    name: string;
-    maxCapacity: number;
-    regularPrice: number;
-    discount: number;
-    description: string;
-    image: string;
-};
+import { useCabinForm } from "./useCabinForm";
+import { FormData } from "./cabinFormSchema";
+import { CabinType } from "../../types";
 
 type CreateCabinFormProps = {
     cabin?: CabinType;
-    setShowForm?: React.Dispatch<React.SetStateAction<boolean>>;
+    onCloseModal?: () => void;
 };
 
-function CreateCabinForm({ cabin, setShowForm }: CreateCabinFormProps) {
-    let formCabin;
-    if (cabin) {
-        const { createdAt, id, ...rest } = cabin;
-        formCabin = rest;
-        createdAt && id && null;
-    }
-    // console.log(formCabin);
-    const {
-        register,
-        handleSubmit,
-        reset,
-        formState: { errors },
-    } = useForm<FormData>({
-        resolver: zodResolver(createCabinFormSchema),
-        defaultValues: cabin
-            ? { ...formCabin }
-            : {
-                  name: "",
-                  maxCapacity: undefined,
-                  regularPrice: undefined,
-                  discount: 0,
-                  description: "",
-                  image: undefined,
-              },
-    });
+function CreateCabinForm({ cabin, onCloseModal }: CreateCabinFormProps) {
+    const { register, handleSubmit, reset, errors } = useCabinForm(cabin);
 
     const { isCreating, createMutation } = useCreateCabin();
     const { isUpdating, updateMutation } = useUpdateCabin();
@@ -107,18 +35,18 @@ function CreateCabinForm({ cabin, setShowForm }: CreateCabinFormProps) {
                               ? `/src/data/cabins/${data.image.item(0)?.name}`
                               : cabin.image,
                   },
-                  { onSuccess: () => setShowForm?.(show => !show) },
+                  { onSuccess: () => onCloseModal?.() },
               )
             : createMutation(data, {
                   onSuccess: () => {
                       reset();
-                      setShowForm?.(show => !show);
+                      onCloseModal?.();
                   },
               });
     };
 
     return (
-        <Form onSubmit={handleSubmit(onSubmit)}>
+        <Form onSubmit={handleSubmit(onSubmit)} type={onCloseModal ? "modal" : "regular"}>
             <FormRow label="Cabin name" error={errors?.name?.message}>
                 <Input
                     type="text"
@@ -182,7 +110,7 @@ function CreateCabinForm({ cabin, setShowForm }: CreateCabinFormProps) {
                 {/* type is an HTML attribute! */}
                 <Button
                     $variation="secondary"
-                    onClick={() => reset()}
+                    onClick={onCloseModal}
                     type="button"
                     disabled={cabin ? isUpdating : isCreating}
                 >
