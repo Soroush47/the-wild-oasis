@@ -1,12 +1,13 @@
-import { useState } from "react";
 import styled from "styled-components";
 
+import { HiPencil, HiSquare2Stack, HiTrash } from "react-icons/hi2";
 import { formatCurrency } from "../../utils/helpers";
 // import Button from "../../ui/Button";
-import CreateCabinForm from "./CreateCabinForm";
-import { useDeleteCabin } from "./useDeleteCabin";
-import { HiPencil, HiSquare2Stack, HiTrash } from "react-icons/hi2";
+
 import { useCreateCabin } from "./useCreateCabin";
+import CreateCabinForm from "./CreateCabinForm";
+import Modal from "../../ui/Modal";
+import ConfirmDelete from "../../ui/ConfirmDelete";
 
 const TableRow = styled.div`
     display: grid;
@@ -62,7 +63,6 @@ type CabinRowProps = {
 };
 
 function CabinRow({ cabin }: CabinRowProps) {
-    const [showForm, setShowForm] = useState(false);
     const {
         id: cabinId,
         name,
@@ -72,7 +72,6 @@ function CabinRow({ cabin }: CabinRowProps) {
         image,
         description,
     } = cabin;
-    const { isDeleting, deleteMutation } = useDeleteCabin();
     const { isCreating, createMutation } = useCreateCabin();
 
     const handleDuplicate = () => {
@@ -102,23 +101,31 @@ function CabinRow({ cabin }: CabinRowProps) {
                     <button onClick={handleDuplicate} disabled={isCreating}>
                         <HiSquare2Stack />
                     </button>
-                    <button
-                        //  size="small"
-                        onClick={() => setShowForm(show => !show)}
-                    >
-                        <HiPencil />
-                    </button>
-                    <button
-                        // $variation="danger" //Transient Props
-                        // size="small"
-                        onClick={() => deleteMutation(cabinId)}
-                        disabled={isDeleting}
-                    >
-                        <HiTrash />
-                    </button>
+                    <Modal>
+                        <Modal.Open opens="edit-cabin">
+                            <button
+                            //  size="small"
+                            >
+                                <HiPencil />
+                            </button>
+                        </Modal.Open>
+                        <Modal.Window name="edit-cabin">
+                            <CreateCabinForm cabin={cabin} />
+                        </Modal.Window>
+                        <Modal.Open opens="delete-cabin">
+                            <button
+                            // $variation="danger" //Transient Props
+                            // size="small"
+                            >
+                                <HiTrash />
+                            </button>
+                        </Modal.Open>
+                        <Modal.Window name="delete-cabin">
+                            <ConfirmDelete resourceName="Cabins" cabinId={cabinId} />
+                        </Modal.Window>
+                    </Modal>
                 </div>
             </TableRow>
-            {showForm && <CreateCabinForm cabin={cabin} setShowForm={setShowForm} />}
         </>
     );
 }

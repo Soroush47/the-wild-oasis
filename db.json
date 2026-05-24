@@ -99,36 +99,6 @@
       "id": "nMkwAKmvqb0"
     },
     {
-      "name": "dfs",
-      "maxCapacity": 123,
-      "regularPrice": 213,
-      "discount": 0,
-      "description": "efd",
-      "image": "/src/data/cabins/cabin-001.jpg",
-      "createdAt": "26/17/19 11:17:20",
-      "id": "K5qirXjNF2k"
-    },
-    {
-      "name": "asfd",
-      "maxCapacity": 234,
-      "regularPrice": 234,
-      "discount": 0,
-      "description": "sff",
-      "image": "/src/data/cabins/empty.png",
-      "createdAt": "26/16/19 21:16:37",
-      "id": "baWOuvlXO0k"
-    },
-    {
-      "name": "sfdf",
-      "maxCapacity": 234,
-      "regularPrice": 235,
-      "discount": 23,
-      "description": "safdf",
-      "image": "/src/data/cabins/cabin-001.jpg",
-      "createdAt": "26/26/19 21:26:03",
-      "id": "mPNx2sJoc9o"
-    },
-    {
       "name": "Bahar",
       "maxCapacity": 234,
       "regularPrice": 34423,
@@ -159,16 +129,6 @@
       "id": "lekYBUL_ins"
     },
     {
-      "name": "Madrid",
-      "maxCapacity": 5,
-      "regularPrice": 700,
-      "discount": 30,
-      "description": "yrtyrty",
-      "image": "/src/data/cabins//empty2.png",
-      "createdAt": "26/54/20 10:54:33",
-      "id": "gAn2G0nJ-6w"
-    },
-    {
       "name": "009",
       "maxCapacity": 6,
       "regularPrice": 300,
@@ -177,16 +137,6 @@
       "image": "/src/data/cabins//cabin-002.jpg",
       "createdAt": "26/23/20 11:23:31",
       "id": "6pPzBvst57Y"
-    },
-    {
-      "name": "dfasdsf",
-      "maxCapacity": 2342,
-      "regularPrice": 234,
-      "discount": 23,
-      "description": "fsdfsf",
-      "image": "/src/data/cabins/empty2.png",
-      "createdAt": "26/18/21 16:18:58",
-      "id": "5i3ABHcH4F8"
     },
     {
       "name": "Copy of dfasdsf",

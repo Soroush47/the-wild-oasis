@@ -1,9 +1,10 @@
 import styled from "styled-components";
 import Button from "./Button";
 import Heading from "./Heading";
+import { useDeleteCabin } from "../features/cabins/useDeleteCabin";
 
 const StyledConfirmDelete = styled.div`
-    width: 40rem;
+    width: 42rem;
     display: flex;
     flex-direction: column;
     gap: 1.2rem;
@@ -22,15 +23,25 @@ const StyledConfirmDelete = styled.div`
 
 interface ConfirmDeleteProps {
     resourceName: string;
-    onConfirm: () => void;
+    // onConfirm: () => void;
     disabled?: boolean;
+    onCloseModal?: () => void;
+    cabinId: number;
 }
 
 function ConfirmDelete({
     resourceName,
-    onConfirm,
-    disabled = false,
+    cabinId,
+    onCloseModal,
 }: ConfirmDeleteProps) {
+    const { isDeleting, deleteMutation } = useDeleteCabin();
+
+    const handleDelete = () => {
+        deleteMutation(cabinId, {
+            onSuccess: () => onCloseModal?.(),
+        });
+    };
+
     return (
         <StyledConfirmDelete>
             <Heading as="h3">Delete {resourceName}</Heading>
@@ -40,10 +51,14 @@ function ConfirmDelete({
             </p>
 
             <div>
-                <Button variation="secondary" disabled={disabled}>
+                <Button
+                    $variation="secondary"
+                    disabled={isDeleting}
+                    onClick={onCloseModal}
+                >
                     Cancel
                 </Button>
-                <Button variation="danger" disabled={disabled}>
+                <Button $variation="danger" disabled={isDeleting} onClick={handleDelete}>
                     Delete
                 </Button>
             </div>

@@ -1,5 +1,3 @@
-import React from "react";
-
 import { useCreateCabin } from "./useCreateCabin";
 import { useUpdateCabin } from "./useUpdateCabin";
 
@@ -9,6 +7,7 @@ import Button from "../../ui/Button";
 import FileInput from "../../ui/FileInput";
 import Textarea from "../../ui/Textarea";
 import FormRow from "../../ui/FormRow";
+
 import { useCabinForm } from "./useCabinForm";
 import { FormData } from "./cabinFormSchema";
 import { CabinType } from "../../types";
