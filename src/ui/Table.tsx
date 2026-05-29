@@ -1,10 +1,6 @@
 import { createContext, ReactNode, useContext } from "react";
 import styled from "styled-components";
 
-interface CommonRowProps {
-    columns: string;
-}
-
 const StyledTable = styled.div`
     border: 1px solid var(--color-grey-200);
 
@@ -14,9 +10,13 @@ const StyledTable = styled.div`
     overflow: hidden;
 `;
 
+interface CommonRowProps {
+    $columns: string;
+}
+
 const CommonRow = styled.div<CommonRowProps>`
     display: grid;
-    grid-template-columns: ${props => props.columns};
+    grid-template-columns: ${props => props.$columns};
     column-gap: 2.4rem;
     align-items: center;
     transition: none;
@@ -90,7 +90,7 @@ interface PropsTypes {
 function Header({ children }: PropsTypes) {
     const { columns } = useTable();
     return (
-        <StyledHeader role="row" columns={columns} as="header">
+        <StyledHeader role="row" $columns={columns} as="header">
             {children}
         </StyledHeader>
     );
@@ -98,7 +98,7 @@ function Header({ children }: PropsTypes) {
 function Row({ children }: PropsTypes) {
     const { columns } = useTable();
     return (
-        <StyledRow role="row" columns={columns}>
+        <StyledRow role="row" $columns={columns}>
             {children}
         </StyledRow>
     );

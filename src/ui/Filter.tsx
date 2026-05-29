@@ -12,7 +12,7 @@ const StyledFilter = styled.div`
 `;
 
 interface FilterButtonProps {
-    active?: boolean;
+    $active?: boolean;
 }
 
 const FilterButton = styled.button<FilterButtonProps>`
@@ -20,7 +20,7 @@ const FilterButton = styled.button<FilterButtonProps>`
     border: none;
 
     ${props =>
-        props.active &&
+        props.$active &&
         css`
             background-color: var(--color-brand-600);
             color: var(--color-brand-50);
@@ -39,37 +39,38 @@ const FilterButton = styled.button<FilterButtonProps>`
     }
 `;
 
-type ClickValue = "all" | "no-discount" | "with-discount";
+type Option = {
+    value: string;
+    label: string;
+};
 
-function Filter() {
+interface FilterProps {
+    filterField: string;
+    options: Option[];
+}
+
+function Filter({ filterField, options }: FilterProps) {
     const [searchParams, setSearchParams] = useSearchParams();
-    const discount = searchParams.get("discount");
+    const filter = searchParams.get(filterField) || options[0].value;
 
-    const handleClick = (value: ClickValue) => {
-        searchParams.set("discount", value);
+    const handleClick = (value: string) => {
+        searchParams.set(filterField, value);
         setSearchParams(searchParams);
     };
 
     return (
         <StyledFilter>
-            <FilterButton
-                active={!discount || discount === "all"}
-                onClick={() => handleClick("all")}
-            >
-                All
-            </FilterButton>
-            <FilterButton
-                active={discount === "no-discount"}
-                onClick={() => handleClick("no-discount")}
-            >
-                No discount
-            </FilterButton>
-            <FilterButton
-                active={discount === "with-discount"}
-                onClick={() => handleClick("with-discount")}
-            >
-                With discount
-            </FilterButton>
+            {options.map(({ value, label }) => (
+                <FilterButton
+                    // active={!filter || filter === "all"}
+                    $active={filter === value}
+                    onClick={() => handleClick(value)}
+                    key={value}
+                    disabled={filter === value}
+                >
+                    {label}
+                </FilterButton>
+            ))}
         </StyledFilter>
     );
 }
