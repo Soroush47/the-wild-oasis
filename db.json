@@ -140,13 +140,23 @@
     },
     {
       "name": "Copy of dfasdsf",
-      "maxCapacity": 2342,
-      "regularPrice": 234,
-      "discount": 23,
+      "maxCapacity": 12,
+      "regularPrice": 8000,
+      "discount": 500,
       "description": "fsdfsf",
-      "image": "/src/data/cabins//empty2.png",
+      "image": "/src/data/cabins/cabin-003.jpg",
       "createdAt": "26/10/23 17:10:32",
       "id": "cWmbX-6jx8U"
+    },
+    {
+      "name": "Copy of Aseman",
+      "maxCapacity": 23,
+      "regularPrice": 2342,
+      "discount": 342,
+      "description": "sdf",
+      "image": "/src/data/cabins//cabin-001.jpg",
+      "createdAt": "26/28/28 15:28:22",
+      "id": "Rvj6eJknnaY"
     }
   ],
   "guests": [

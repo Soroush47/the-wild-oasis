@@ -9,6 +9,7 @@ import CreateCabinForm from "./CreateCabinForm";
 import Modal from "../../ui/Modal";
 import ConfirmDelete from "../../ui/ConfirmDelete";
 import Table from "../../ui/Table";
+import Menus from "../../ui/Menus";
 
 // const TableRow = styled.div`
 //     display: grid;
@@ -73,7 +74,7 @@ function CabinRow({ cabin }: CabinRowProps) {
         image,
         description,
     } = cabin;
-    const { isCreating, createMutation } = useCreateCabin();
+    const { createMutation } = useCreateCabin();
 
     const handleDuplicate = () => {
         createMutation({
@@ -97,29 +98,29 @@ function CabinRow({ cabin }: CabinRowProps) {
             ) : (
                 <span>&mdash;</span>
             )}
+
             <div>
-                <button onClick={handleDuplicate} disabled={isCreating}>
-                    <HiSquare2Stack />
-                </button>
                 <Modal>
-                    <Modal.Open opens="edit-cabin">
-                        <button
-                        //  size="small"
-                        >
-                            <HiPencil />
-                        </button>
-                    </Modal.Open>
+                    <Menus.Menu>
+                        <Menus.Toggle id={cabinId} />
+                        <Menus.List id={cabinId}>
+                            <Menus.Button
+                                icon={<HiSquare2Stack />}
+                                onClick={handleDuplicate}
+                            >
+                                Duplicate
+                            </Menus.Button>
+                            <Modal.Open opens="edit-cabin">
+                                <Menus.Button icon={<HiPencil />}>Edit</Menus.Button>
+                            </Modal.Open>
+                            <Modal.Open opens="delete-cabin">
+                                <Menus.Button icon={<HiTrash />}>Delete</Menus.Button>
+                            </Modal.Open>
+                        </Menus.List>
+                    </Menus.Menu>
                     <Modal.Window name="edit-cabin">
                         <CreateCabinForm cabin={cabin} />
                     </Modal.Window>
-                    <Modal.Open opens="delete-cabin">
-                        <button
-                        // $variation="danger" //Transient Props
-                        // size="small"
-                        >
-                            <HiTrash />
-                        </button>
-                    </Modal.Open>
                     <Modal.Window name="delete-cabin">
                         <ConfirmDelete resourceName="Cabins" cabinId={cabinId} />
                     </Modal.Window>

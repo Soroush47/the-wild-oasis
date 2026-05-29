@@ -102,7 +102,7 @@ interface WindowProps {
 
 function Window({ name, children }: WindowProps) {
     const { close, openName } = useModal();
-    const ref = useOutsideClick(close, true);
+    const ref = useOutsideClick<HTMLDivElement>(close, true);
     if (name !== openName) return null;
     return createPortal(
         <Overlay>
