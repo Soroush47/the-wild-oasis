@@ -157,6 +157,26 @@
       "image": "/src/data/cabins//cabin-001.jpg",
       "createdAt": "26/28/28 15:28:22",
       "id": "Rvj6eJknnaY"
+    },
+    {
+      "name": "uyiyui",
+      "maxCapacity": 10,
+      "regularPrice": 400,
+      "discount": 50,
+      "description": "fhfg",
+      "image": "/src/data/cabins/cabin-004.jpg",
+      "createdAt": "26/09/29 10:09:27",
+      "id": "BiTufhV_ZgU"
+    },
+    {
+      "name": "dasda",
+      "maxCapacity": 5,
+      "regularPrice": 440,
+      "discount": 0,
+      "description": "gsdg",
+      "image": "/src/data/cabins/cabin-006.jpg",
+      "createdAt": "26/53/29 11:53:28",
+      "id": "FztAwjBJTqg"
     }
   ],
   "guests": [
