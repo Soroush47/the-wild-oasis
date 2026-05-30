@@ -16,19 +16,43 @@ type CabinType = {
     image: string;
 };
 
+type Field = "name" | "regularPrice" | "maxCapacity" | "start";
+type Direction = "asc" | "desc" | "date";
+
 function CabinTable() {
     const { data, isLoading } = useCabins();
     const [searchParams] = useSearchParams();
 
-    const cabins = data?.data;
-    const discount = searchParams.get("discount") || "all";
+    const cabins = data?.data ?? [];
+    const filter = searchParams.get("discount") || "all";
+    const sortBy = searchParams.get("sortBy") || "start-date";
+    const [field, direction]: [Field, Direction] = sortBy?.split("-") as [
+        Field,
+        Direction,
+    ];
+    const modifier = direction === "asc" ? 1 : -1;
+
+    const sortedCabins =
+        field !== "start"
+            ? [...cabins].sort((a: CabinType, b: CabinType) => {
+                  if (field === "name") {
+                      if (a.name.toLocaleUpperCase() < b.name.toLocaleUpperCase())
+                          return -1 * modifier;
+                      if (a.name.toLocaleUpperCase() > b.name.toLocaleUpperCase())
+                          return 1 * modifier;
+                      return 0;
+                  }
+                  return (a[field] - b[field]) * modifier;
+              })
+            : [...cabins];
+
     const filteredCabins =
-        discount === "all"
-            ? cabins
-            : cabins?.filter(
+        filter === "all"
+            ? sortedCabins
+            : sortedCabins?.filter(
                   (cabin: CabinType) =>
-                      (discount === "no-discount" && !cabin.discount) ||
-                      (discount === "with-discount" && cabin.discount),
+                      (filter === "no-discount" && !cabin.discount) ||
+                      (filter === "with-discount" && cabin.discount),
               );
 
     if (isLoading) return <Spinner />;
