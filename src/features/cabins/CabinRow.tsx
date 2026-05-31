@@ -10,6 +10,7 @@ import Modal from "../../ui/Modal";
 import ConfirmDelete from "../../ui/ConfirmDelete";
 import Table from "../../ui/Table";
 import Menus from "../../ui/Menus";
+import { CabinType } from "../../types";
 
 // const TableRow = styled.div`
 //     display: grid;
@@ -48,17 +49,6 @@ const Discount = styled.div`
     font-weight: 500;
     color: var(--color-green-700);
 `;
-
-type CabinType = {
-    id: number;
-    createdAt: Date;
-    name: string;
-    maxCapacity: number;
-    regularPrice: number;
-    discount: number;
-    description: string;
-    image: string;
-};
 
 type CabinRowProps = {
     cabin: CabinType;

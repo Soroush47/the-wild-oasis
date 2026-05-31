@@ -4,17 +4,8 @@ import CabinRow from "./CabinRow";
 import Table from "../../ui/Table";
 import Menus from "../../ui/Menus";
 import { useSearchParams } from "react-router-dom";
-
-type CabinType = {
-    id: number;
-    createdAt: Date;
-    name: string;
-    maxCapacity: number;
-    regularPrice: number;
-    discount: number;
-    description: string;
-    image: string;
-};
+import { CabinType } from "../../types";
+import Empty from "../../ui/Empty";
 
 type Field = "name" | "regularPrice" | "maxCapacity" | "start";
 type Direction = "asc" | "desc" | "date";
@@ -56,6 +47,7 @@ function CabinTable() {
               );
 
     if (isLoading) return <Spinner />;
+    if (!cabins?.length) return <Empty resourceName="cabins" />;
 
     return (
         <Menus>

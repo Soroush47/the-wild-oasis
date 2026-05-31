@@ -1,4 +1,4 @@
-export type CabinType = {
+export interface CabinType {
     id: number;
     createdAt: Date;
     name: string;
@@ -7,4 +7,24 @@ export type CabinType = {
     discount: number;
     description: string;
     image: string;
-};
+}
+
+export interface BookingType {
+    id: number;
+    createdAt: Date;
+    startDate: Date;
+    endDate: Date;
+    numNights: number;
+    numGuests: number;
+    cabinPrice: number;
+    extrasPrice: number;
+    totalPrice: number;
+    status: "unconfirmed" | "checked-in" | "checked-out";
+    hasBreakfast: boolean;
+    isPaid: boolean;
+    observations: string;
+    // cabinId: number;
+    // guestId: number;
+    cabin: { name: string };
+    guest: { fullName: string; email: string };
+}

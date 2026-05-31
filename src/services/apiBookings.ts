@@ -1,5 +1,13 @@
+import api from "../configs/api";
 import { getToday } from "../utils/helpers";
 import supabase from "./supabase";
+
+
+export async function getBookings(){
+  const res = await api.get("/bookings");
+  console.log(res.data)
+  return res
+}
 
 export async function getBooking(id) {
   const { data, error } = await supabase
