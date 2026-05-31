@@ -22,13 +22,13 @@ export function useOutsideClick<
             const isInsideMain = ref.current?.contains(target);
             const isInsideExtra = extraRef?.current?.contains(target);
             // console.log({ref, extraRef})
-            if (isInsideMain) console.log("inside main");
-            if (isInsideExtra) console.log("Inside Extra");
+            // if (isInsideMain) console.log("inside main");
+            // if (isInsideExtra) console.log("Inside Extra");
 
             if (ref.current && !isInsideMain && !isInsideExtra) {
                 // e.stopPropagation();
                 // actionRef.current();
-                console.log("action");
+                // console.log("action");
                 action();
             }
         };

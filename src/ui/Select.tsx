@@ -31,7 +31,7 @@ interface SelectProps {
 }
 
 function Select({ options, ...rest }: SelectProps) {
-    console.log(rest);
+    // console.log(rest);
     return (
         <StyledSelect {...rest}>
             <option value="start-date">-</option>

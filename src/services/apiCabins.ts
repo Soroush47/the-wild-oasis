@@ -1,22 +1,17 @@
-// import supabase from "./supabase";
 
 import { format } from "date-fns";
 import api from "../configs/api";
 
 export async function getCabins() {
-    // const { data, error } = await supabase.from("cabins").select("*");
-    // if (error) {
-    //     console.error(`Supabase error: ${error}`);
-    //     throw new Error("Cabins could not be loaded");
-    // }
-
-    // return data;
-
-    return api.get("/cabins");
+    const res = await api.get("/cabins");
+    console.log(res.data);
+    return res;
 }
 
 export async function deleteCabin(id: number) {
-    return api.delete(`/cabins/${id}`);
+    const res = await api.delete(`/cabins/${id}`);
+    console.log(res.data);
+    return res;
 }
 
 interface Cabin {
@@ -31,7 +26,7 @@ interface Cabin {
 }
 
 export async function createCabin(cabin: Cabin) {
-    const date = format(new Date(), "yy/mm/dd HH:mm:ss"); //HH:24 , hh:12
+    const date = format(new Date(), "yyyy/MM/dd HH:mm:ss"); //HH:24 , hh:12
     cabin.createdAt = date;
     const newCabin = {
         ...cabin,
@@ -43,19 +38,13 @@ export async function createCabin(cabin: Cabin) {
                 : "empty2.png"
         }`,
     };
-    return api.post("/cabins", newCabin);
+    const res = await api.post("/cabins", newCabin);
+    console.log(res.data);
+    return res;
 }
 
 export async function updateCabin(cabin: Cabin) {
-    // const editedCabin = {
-    //     ...cabin,
-    //     image: `/src/data/cabins/${
-    //         cabin.image?.length
-    //             ? typeof cabin.image !== "string"
-    //                 ? cabin.image.item(0)?.name
-    //                 : cabin.image
-    //             : "empty2.png"
-    //     }`,
-    // };
-    return api.patch(`/cabins/${cabin.id}`, cabin);
+    const res = await api.patch(`/cabins/${cabin.id}`, cabin);
+    console.log(res.data);
+    return res;
 }

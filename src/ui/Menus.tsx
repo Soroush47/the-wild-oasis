@@ -151,7 +151,6 @@ function Toggle({ id }: ToggleProps) {
         const rect = (e.target as Element).closest("button")?.getBoundingClientRect();
 
         if (!rect) return null;
-        console.log(rect, window.innerWidth, window.innerHeight);
         const contextMenuHeight = 120;
         const position = {
             x: window.innerWidth - rect.left + 4,
@@ -161,7 +160,6 @@ function Toggle({ id }: ToggleProps) {
                     : rect.top - 4 - contextMenuHeight,
         };
 
-        console.log({ openId, id });
         openId === null || openId !== id ? open(id, position) : close();
     };
 
