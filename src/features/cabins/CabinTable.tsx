@@ -7,8 +7,8 @@ import { useSearchParams } from "react-router-dom";
 import { CabinType } from "../../types";
 import Empty from "../../ui/Empty";
 
-type Field = "name" | "regularPrice" | "maxCapacity" | "start";
-type Direction = "asc" | "desc" | "date";
+type Field = "name" | "regularPrice" | "maxCapacity" | "createdAt";
+type Direction = "asc" | "desc";
 
 function CabinTable() {
     const { data, isLoading } = useCabins();
@@ -16,7 +16,7 @@ function CabinTable() {
 
     const cabins = data?.data ?? [];
     const filter = searchParams.get("discount") || "all";
-    const sortBy = searchParams.get("sortBy") || "start-date";
+    const sortBy = searchParams.get("sortBy") || "createdAt-asc";
     const [field, direction]: [Field, Direction] = sortBy?.split("-") as [
         Field,
         Direction,
@@ -24,7 +24,7 @@ function CabinTable() {
     const modifier = direction === "asc" ? 1 : -1;
 
     const sortedCabins =
-        field !== "start"
+        field !== "createdAt"
             ? [...cabins].sort((a: CabinType, b: CabinType) => {
                   if (field === "name") {
                       if (a.name.toLocaleUpperCase() < b.name.toLocaleUpperCase())

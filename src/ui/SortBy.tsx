@@ -14,7 +14,7 @@ interface SortByProps {
 function SortBy({ options }: SortByProps) {
     const [searchParams, setSearchParams] = useSearchParams();
 
-    const sort = searchParams.get("sortBy") || "start-date";
+    const sort = searchParams.get("sortBy") || "createdAt-asc";
 
     const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
         const value = event.target.value;

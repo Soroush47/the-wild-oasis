@@ -1,12 +1,14 @@
 import { useState } from "react";
-import { isFuture, isPast, isToday } from "date-fns";
-import supabase from "../services/supabase";
+// import { isFuture, isPast, isToday } from "date-fns";
 import Button from "../ui/Button";
-import { subtractDates } from "../utils/helpers";
+// import { subtractDates } from "../utils/helpers";
 
 import { bookings } from "./data-bookings";
 import { cabins } from "./data-cabins";
 import { guests } from "./data-guests";
+import api from "../configs/api";
+import { subtractDates } from "../utils/helpers";
+import { isFuture, isPast, isToday } from "date-fns";
 
 // const originalSettings = {
 //   minBookingLength: 3,
@@ -15,41 +17,70 @@ import { guests } from "./data-guests";
 //   breakfastPrice: 15,
 // };
 
+// DELETE all data
 async function deleteGuests() {
-    const { error } = await supabase.from("guests").delete().gt("id", 0);
-    if (error) console.log(error.message);
+    try {
+        const res = await api.delete("/guests/delete-all");
+        console.log(res.data?.message);
+    } catch (error) {
+        console.log("Error deleting all guests: ", error);
+    }
 }
-
 async function deleteCabins() {
-    const { error } = await supabase.from("cabins").delete().gt("id", 0);
-    if (error) console.log(error.message);
+    try {
+        const res = await api.delete("/cabins/delete-all");
+        console.log(res.data?.message);
+    } catch (error) {
+        console.log("Error deleting all cabins: ", error);
+    }
 }
-
 async function deleteBookings() {
-    const { error } = await supabase.from("bookings").delete().gt("id", 0);
-    if (error) console.log(error.message);
+    try {
+        const res = await api.delete("/bookings/delete-all");
+        console.log(res.data?.message);
+    } catch (error) {
+        console.log("Error deleting all bookings: ", error);
+    }
 }
 
+// // POST many data
 async function createGuests() {
-    const { error } = await supabase.from("guests").insert(guests);
-    if (error) console.log(error.message);
+    try {
+        // guests
+        //     .map((guest, index) => {
+        //         console.log({ id: index, email: guest.email });
+        //         return guest.email;
+        //     })
+        //     .sort();
+        // console.log({ emails });
+        const res = await api.post("/guests/create-many", guests);
+        console.log(res.data?.message);
+    } catch (error) {
+        console.log("Error creating many guests: ", error);
+    }
 }
 
 async function createCabins() {
-    const { error } = await supabase.from("cabins").insert(cabins);
-    if (error) console.log(error.message);
+    try {
+        const res = await api.post("/cabins/create-many", cabins);
+        console.log(res.data?.message);
+    } catch (error) {
+        console.log("Error creating many cabins: ", error);
+    }
 }
 
 async function createBookings() {
     // Bookings need a guestId and a cabinId. We can't tell Supabase IDs for each object, it will calculate them on its own. So it might be different for different people, especially after multiple uploads. Therefore, we need to first get all guestIds and cabinIds, and then replace the original IDs in the booking data with the actual ones from the DB
-    const { data: guestsIds } = await supabase.from("guests").select("id").order("id");
-    const allGuestIds = guestsIds.map(cabin => cabin.id);
-    const { data: cabinsIds } = await supabase.from("cabins").select("id").order("id");
-    const allCabinIds = cabinsIds.map(cabin => cabin.id);
-
+    const {
+        data: [guestsIds, cabinsIds],
+    } = await api.get("/cabinIds-guestIds");
+    const allGuestIds = guestsIds?.map((guest: { id: number }) => guest.id);
+    const allCabinIds = cabinsIds?.map((cabin: { id: number }) => cabin.id);
+    console.log("guestsIds ", allGuestIds);
+    console.log("cabinIds ", allCabinIds);
     const finalBookings = bookings.map(booking => {
         // Here relying on the order of cabins, as they don't have and ID yet
-        const cabin = cabins.at(booking.cabinId - 1);
+        const cabin = cabins[booking.cabinId - 1];
         const numNights = subtractDates(booking.endDate, booking.startDate);
         const cabinPrice = numNights * (cabin.regularPrice - cabin.discount);
         const extrasPrice = booking.hasBreakfast ? numNights * 15 * booking.numGuests : 0; // hardcoded breakfast price
@@ -73,16 +104,22 @@ async function createBookings() {
             cabinPrice,
             extrasPrice,
             totalPrice,
-            guestId: allGuestIds.at(booking.guestId - 1),
-            cabinId: allCabinIds.at(booking.cabinId - 1),
+            guestId: allGuestIds?.[booking.guestId - 1],
+            cabinId: allCabinIds?.[booking.cabinId - 1],
             status,
+            startDate: new Date(booking.startDate),
+            endDate: new Date(booking.endDate),
         };
     });
 
     console.log(finalBookings);
 
-    const { error } = await supabase.from("bookings").insert(finalBookings);
-    if (error) console.log(error.message);
+    try {
+        const res = await api.post("/bookings/create-many", finalBookings);
+        console.log(res.data?.message);
+    } catch (error) {
+        console.log("Error creating many bookings: ", error);
+    }
 }
 
 function Uploader() {
@@ -90,7 +127,7 @@ function Uploader() {
 
     async function uploadAll() {
         setIsLoading(true);
-        // Bookings need to be deleted FIRST
+        // // Bookings need to be deleted FIRST
         await deleteBookings();
         await deleteGuests();
         await deleteCabins();
@@ -103,12 +140,12 @@ function Uploader() {
         setIsLoading(false);
     }
 
-    async function uploadBookings() {
-        setIsLoading(true);
-        await deleteBookings();
-        await createBookings();
-        setIsLoading(false);
-    }
+    // async function uploadBookings() {
+    //     setIsLoading(true);
+    //     await deleteBookings();
+    //     await createBookings();
+    //     setIsLoading(false);
+    // }
 
     return (
         <div
@@ -129,7 +166,10 @@ function Uploader() {
                 Upload ALL
             </Button>
 
-            <Button onClick={uploadBookings} disabled={isLoading}>
+            <Button
+                // onClick={   uploadBookings}
+                disabled={isLoading}
+            >
                 Upload bookings ONLY
             </Button>
         </div>

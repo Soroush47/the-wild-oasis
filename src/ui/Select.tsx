@@ -34,7 +34,7 @@ function Select({ options, ...rest }: SelectProps) {
     // console.log(rest);
     return (
         <StyledSelect {...rest}>
-            <option value="start-date">-</option>
+            <option value="createdAt-asc">-</option>
             {options.map(({ value, label }) => (
                 <option key={value} value={value}>
                     {label}

@@ -6,9 +6,17 @@ const api = axios.create({
     headers: { "Content-Type": "application/json" },
 });
 
-// api.interceptors.request.use(
-//     req => new Promise(resolve => setTimeout(() => resolve(req), 800)),
-//     error => Promise.reject(error),
-// );
+api.interceptors.request.use(
+    // req => new Promise(resolve => setTimeout(() => resolve(req), 800)),
+    req => {
+        // console.log("--- Axios Request ---");
+        // console.log("URL:", req.url);
+        // console.log("Method:", req.method);
+        // console.log("Headers:", req.headers);
+        // console.log("Data:", req.data);
+        return req;
+    },
+    error => Promise.reject(error),
+);
 
 export default api;
