@@ -15,7 +15,7 @@ function BookingTable() {
     const { data, isLoading } = useBookings();
     const [searchParams] = useSearchParams();
 
-    // const filter = searchParams.get("status") || "all"
+    const status = searchParams.get("status") || "all";
     const sortBy = searchParams.get("sortBy") || "createdAt-asc";
     const [field, direction] = sortBy?.split("-") as [Field, Direction];
     const modifier = direction === "asc" ? 1 : -1;
@@ -30,6 +30,11 @@ function BookingTable() {
                       (Number(new Date(a[field])) - Number(new Date(b[field]))) *
                       modifier,
               );
+
+    const filteredBookings =
+        status === "all"
+            ? [...sortedBookings]
+            : sortedBookings.filter((booking: BookingType) => booking.status === status);
     if (isLoading) return <Spinner />;
     if (!bookings?.length) return <Empty resourceName="bookings" />;
 
@@ -46,7 +51,7 @@ function BookingTable() {
                 </Table.Header>
 
                 <Table.Body
-                    data={sortedBookings}
+                    data={filteredBookings}
                     render={(booking: BookingType) => (
                         <BookingRow key={booking.id} booking={booking} />
                     )}
