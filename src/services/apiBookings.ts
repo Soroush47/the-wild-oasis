@@ -2,8 +2,26 @@ import api from "../configs/api";
 import { getToday } from "../utils/helpers";
 import supabase from "./supabase";
 
-export async function getBookings() {
-    const res = await api.get("/bookings");
+type Filter = {
+    field: "status";
+    value: "unconfirmed" | "checked-in" | "checked-out" | "all";
+};
+
+type SortBy =
+    | "startDate-asc"
+    | "startDate-desc"
+    | "totalPrice-asc"
+    | "totalPrice-desc"
+    | "createdAt-asc";
+
+
+export async function getBookings(filter: Filter, sortBy: SortBy) {
+    let url = "/bookings";
+
+    if (filter.value !== "all") url += `?${filter.field}=${filter.value}&`;
+    if (sortBy !== "createdAt-asc") url += `sortBy=${sortBy}`;
+
+    const res = await api.get(url);
     console.log(res.data);
     return res;
 }
