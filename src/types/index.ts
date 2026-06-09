@@ -26,5 +26,11 @@ export interface BookingType {
     // cabinId: number;
     // guestId: number;
     cabin: { name: string };
-    guest: { fullName: string; email: string };
+    guest: {
+        fullName: string;
+        email: string;
+        nationality?: string;
+        countryFlag?: string;
+        nationalID?: string;
+    };
 }

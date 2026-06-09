@@ -28,18 +28,9 @@ export async function getBookings(filter: Filter, sortBy: SortBy, page: number) 
 }
 
 export async function getBooking(id: number) {
-    const { data, error } = await supabase
-        .from("bookings")
-        .select("*, cabins(*), guests(*)")
-        .eq("id", id)
-        .single();
+    const res = await api.get(`/bookings/${id}`);
 
-    if (error) {
-        console.error(error);
-        throw new Error("Booking not found");
-    }
-
-    return data;
+    return res;
 }
 
 // Returns all BOOKINGS that are were created after the given date. Useful to get bookings created in the last 30 days, for example.
@@ -96,22 +87,12 @@ export async function getStaysTodayActivity() {
     return data;
 }
 
-export async function updateBooking(id, obj) {
-    const { data, error } = await supabase
-        .from("bookings")
-        .update(obj)
-        .eq("id", id)
-        .select()
-        .single();
-
-    if (error) {
-        console.error(error);
-        throw new Error("Booking could not be updated");
-    }
-    return data;
+export async function updateBooking<T>(id: number, obj?: T) {
+    const res = await api.patch(`/bookings/${id}`, obj);
+    return res;
 }
 
-export async function deleteBooking(id) {
+export async function deleteBooking(id: number) {
     // REMEMBER RLS POLICIES
     const { data, error } = await supabase.from("bookings").delete().eq("id", id);
 

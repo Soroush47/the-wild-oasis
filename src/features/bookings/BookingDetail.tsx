@@ -1,4 +1,8 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+
+import { useBooking } from "./useBooking";
+import { useMoveBack } from "../../hooks/useMoveBack";
 
 import BookingDataBox from "./BookingDataBox";
 import Row from "../../ui/Row";
@@ -7,46 +11,57 @@ import Tag from "../../ui/Tag";
 import ButtonGroup from "../../ui/ButtonGroup";
 import Button from "../../ui/Button";
 import ButtonText from "../../ui/ButtonText";
-
-import { useMoveBack } from "../../hooks/useMoveBack";
+import Spinner from "../../ui/Spinner";
 
 const HeadingGroup = styled.div`
-  display: flex;
-  gap: 2.4rem;
-  align-items: center;
+    display: flex;
+    gap: 2.4rem;
+    align-items: center;
 `;
 
+type Status = "unconfirmed" | "checked-in" | "checked-out";
+
 function BookingDetail() {
-  const booking = {};
-  const status = "checked-in";
+    const navigate = useNavigate();
+    const moveBack = useMoveBack();
+    const { data, error, isLoading } = useBooking();
 
-  const moveBack = useMoveBack();
+    const status = data?.data.status as Status;
+    const id = data?.data.id;
 
-  const statusToTagName = {
-    unconfirmed: "blue",
-    "checked-in": "green",
-    "checked-out": "silver",
-  };
+    const statusToTagName = {
+        unconfirmed: "blue",
+        "checked-in": "green",
+        "checked-out": "silver",
+    };
 
-  return (
-    <>
-      <Row type="horizontal">
-        <HeadingGroup>
-          <Heading as="h1">Booking #X</Heading>
-          <Tag type={statusToTagName[status]}>{status.replace("-", " ")}</Tag>
-        </HeadingGroup>
-        <ButtonText onClick={moveBack}>&larr; Back</ButtonText>
-      </Row>
+    if (isLoading) return <Spinner />;
+    if (error) return null;
 
-      <BookingDataBox booking={booking} />
+    console.log(data?.data);
 
-      <ButtonGroup>
-        <Button variation="secondary" onClick={moveBack}>
-          Back
-        </Button>
-      </ButtonGroup>
-    </>
-  );
+    return (
+        <>
+            <Row type="horizontal">
+                <HeadingGroup>
+                    <Heading as="h1">Booking #{id}</Heading>
+                    <Tag type={statusToTagName[status]}>{status.replace("-", " ")}</Tag>
+                </HeadingGroup>
+                <ButtonText onClick={moveBack}>&larr; Back</ButtonText>
+            </Row>
+
+            <BookingDataBox booking={data?.data} />
+
+            <ButtonGroup>
+                {status === "unconfirmed" && (
+                    <Button onClick={() => navigate(`/checkin/${id}`)}>Check in</Button>
+                )}
+                <Button $variation="secondary" onClick={moveBack}>
+                    Back
+                </Button>
+            </ButtonGroup>
+        </>
+    );
 }
 
 export default BookingDetail;

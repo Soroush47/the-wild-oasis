@@ -83,6 +83,7 @@ const StyledButton = styled.button`
 `;
 
 interface MenusProps {
+    type: "booking" | "cabin";
     children: ReactNode;
 }
 
@@ -92,6 +93,7 @@ type Position = {
 };
 
 interface MenusContextType {
+    type: string;
     openId: number | null;
     close: () => void;
     open: (id: number, position: Position) => void;
@@ -102,7 +104,7 @@ interface MenusContextType {
 
 const MenusContext = createContext<MenusContextType | undefined>(undefined);
 
-function Menus({ children }: MenusProps) {
+function Menus({ type, children }: MenusProps) {
     const [openId, setOpenId] = useState<number | null>(null);
     const [position, setPosition] = useState<Position | null>(null);
     // const close = useCallback(() => {
@@ -130,6 +132,7 @@ function Menus({ children }: MenusProps) {
     );
 
     const contextValue = {
+        type,
         openId,
         position,
         open,
@@ -145,13 +148,13 @@ interface ToggleProps {
 }
 
 function Toggle({ id }: ToggleProps) {
-    const { openId, open, close, toggleRef } = useMenus();
+    const { type, openId, open, close, toggleRef } = useMenus();
 
     const handleClick = (e: PointerEvent<HTMLButtonElement>) => {
         const rect = (e.target as Element).closest("button")?.getBoundingClientRect();
 
         if (!rect) return null;
-        const contextMenuHeight = 120;
+        const contextMenuHeight = type === "cabin" ? 120 : 40;
         const position = {
             x: window.innerWidth - rect.left + 4,
             y:
