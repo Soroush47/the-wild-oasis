@@ -21,10 +21,14 @@ export function useBookings() {
 
     const filterValue = (searchParams.get("status") || "all") as FilterValue;
     const filter: Filter = { field: "status", value: filterValue };
+
     const sortBy = (searchParams.get("sortBy") || "createdAt-asc") as SortBy;
+
+    const page = Number(searchParams.get("page")) || 1;
+
     const { data, isLoading } = useQuery({
-        queryKey: ["bookings", filter, sortBy],
-        queryFn: () => getBookings(filter, sortBy),
+        queryKey: ["bookings", filter, sortBy, page],
+        queryFn: () => getBookings(filter, sortBy, page),
     });
 
     return { data, isLoading };

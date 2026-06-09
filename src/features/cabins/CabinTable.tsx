@@ -6,6 +6,8 @@ import Menus from "../../ui/Menus";
 import { useSearchParams } from "react-router-dom";
 import { CabinType } from "../../types";
 import Empty from "../../ui/Empty";
+import Pagination from "../../ui/Pagination";
+import { PAGE_SIZE } from "../../utils/constants";
 
 type Field = "name" | "regularPrice" | "maxCapacity" | "createdAt";
 type Direction = "asc" | "desc";
@@ -17,6 +19,7 @@ function CabinTable() {
     const cabins = data?.data ?? [];
     const filter = searchParams.get("discount") || "all";
     const sortBy = searchParams.get("sortBy") || "createdAt-asc";
+    const currentPage = Number(searchParams.get("page")) || 1;
     const [field, direction]: [Field, Direction] = sortBy?.split("-") as [
         Field,
         Direction,
@@ -46,6 +49,10 @@ function CabinTable() {
                       (filter === "with-discount" && cabin.discount),
               );
 
+    const firstItem = (currentPage - 1) * PAGE_SIZE;
+    console.log({ firstItem, currentPage });
+    const showCabins = filteredCabins.slice(firstItem, firstItem + PAGE_SIZE);
+
     if (isLoading) return <Spinner />;
     if (!cabins?.length) return <Empty resourceName="cabins" />;
 
@@ -62,11 +69,14 @@ function CabinTable() {
                 </Table.Header>
 
                 <Table.Body
-                    data={filteredCabins}
+                    data={showCabins}
                     render={(cabin: CabinType) => (
                         <CabinRow cabin={cabin} key={cabin.id} />
                     )}
                 />
+                <Table.Footer>
+                    <Pagination count={filteredCabins.length} />
+                </Table.Footer>
             </Table>
         </Menus>
     );

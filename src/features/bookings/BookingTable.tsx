@@ -7,6 +7,7 @@ import { useBookings } from "./useBookings";
 import Spinner from "../../ui/Spinner";
 import { BookingType } from "../../types";
 import Empty from "../../ui/Empty";
+import Pagination from "../../ui/Pagination";
 
 // type Field = "startDate" | "totalPrice" | "createdAt";
 // type Direction = "asc" | "desc";
@@ -20,7 +21,8 @@ function BookingTable() {
     // const [field, direction] = sortBy?.split("-") as [Field, Direction];
     // const modifier = direction === "asc" ? 1 : -1;
 
-    const bookings = data?.data ?? [];
+    const bookings = data?.data.bookings ?? [];
+    const count = data?.data.count ?? 0;
 
     // const sortedBookings =
     //     sortBy === "createdAt-asc"
@@ -56,6 +58,9 @@ function BookingTable() {
                         <BookingRow key={booking.id} booking={booking} />
                     )}
                 />
+                <Table.Footer>
+                    <Pagination count={count} />
+                </Table.Footer>
             </Table>
         </Menus>
     );

@@ -1,6 +1,7 @@
 import api from "../configs/api";
 import { getToday } from "../utils/helpers";
 import supabase from "./supabase";
+import { PAGE_SIZE } from "../utils/constants";
 
 type Filter = {
     field: "status";
@@ -14,11 +15,11 @@ type SortBy =
     | "totalPrice-desc"
     | "createdAt-asc";
 
-
-export async function getBookings(filter: Filter, sortBy: SortBy) {
+export async function getBookings(filter: Filter, sortBy: SortBy, page: number) {
     let url = "/bookings";
 
-    if (filter.value !== "all") url += `?${filter.field}=${filter.value}&`;
+    url += `?page=${page}&limit=${PAGE_SIZE || 10}&`;
+    if (filter.value !== "all") url += `${filter.field}=${filter.value}&`;
     if (sortBy !== "createdAt-asc") url += `sortBy=${sortBy}`;
 
     const res = await api.get(url);
