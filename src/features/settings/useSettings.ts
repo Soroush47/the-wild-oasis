@@ -6,7 +6,6 @@ export function useSettings() {
         queryKey: ["settings"],
         queryFn: getSettings,
     });
-    console.log({ isLoading });
 
     const settings = data?.data;
 

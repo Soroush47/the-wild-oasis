@@ -89,16 +89,12 @@ export async function getStaysTodayActivity() {
 
 export async function updateBooking<T>(id: number, obj?: T) {
     const res = await api.patch(`/bookings/${id}`, obj);
+    console.log(res.data);
     return res;
 }
 
 export async function deleteBooking(id: number) {
-    // REMEMBER RLS POLICIES
-    const { data, error } = await supabase.from("bookings").delete().eq("id", id);
+    const res = await api.delete(`/bookings/${id}`);
 
-    if (error) {
-        console.error(error);
-        throw new Error("Booking could not be deleted");
-    }
-    return data;
+    return res;
 }

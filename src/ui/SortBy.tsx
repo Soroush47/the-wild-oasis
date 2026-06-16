@@ -19,7 +19,7 @@ function SortBy({ options }: SortByProps) {
     const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
         const value = event.target.value;
         searchParams.set("sortBy", value);
-        searchParams.set("page", "1");
+        searchParams.get("page") && searchParams.set("page", "1");
         setSearchParams(searchParams);
     };
 

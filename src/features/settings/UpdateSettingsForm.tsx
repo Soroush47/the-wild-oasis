@@ -4,17 +4,12 @@ import FormRow from "../../ui/FormRow";
 import Input from "../../ui/Input";
 import Spinner from "../../ui/Spinner";
 import { useUpdateSetting } from "./useUpdateSetting";
-
-interface Settings {
-    minBookingLength: number;
-    maxBookingLength: number;
-    maxGuestsPerBooking: number;
-    breakfastPrice: number;
-}
+import { Settings } from "../../types";
 
 function UpdateSettingsForm() {
     const { isLoading, settings } = useSettings();
     const { isUpdating, updateMutation } = useUpdateSetting();
+
     const { minBookingLength, maxBookingLength, maxGuestsPerBooking, breakfastPrice } =
         settings ?? {};
 

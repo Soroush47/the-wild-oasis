@@ -12,6 +12,10 @@ import ButtonGroup from "../../ui/ButtonGroup";
 import Button from "../../ui/Button";
 import ButtonText from "../../ui/ButtonText";
 import Spinner from "../../ui/Spinner";
+import { useCheckout } from "../check-in-out/useCheckout";
+import { useDeleteBooking } from "./useDeleteBooking";
+import Modal from "../../ui/Modal";
+import ConfirmDelete from "../../ui/ConfirmDelete";
 
 const HeadingGroup = styled.div`
     display: flex;
@@ -25,6 +29,8 @@ function BookingDetail() {
     const navigate = useNavigate();
     const moveBack = useMoveBack();
     const { data, error, isLoading } = useBooking();
+    const { checkoutMutation, isCheckingOut } = useCheckout();
+    const { deleteMutation, isDeleting } = useDeleteBooking();
 
     const status = data?.data.status as Status;
     const id = data?.data.id;
@@ -53,8 +59,34 @@ function BookingDetail() {
             <BookingDataBox booking={data?.data} />
 
             <ButtonGroup>
+                <Modal>
+                    <Modal.Open opens="delete">
+                        <Button $variation="danger">Delete</Button>
+                    </Modal.Open>
+                    <Modal.Window name="delete">
+                        <ConfirmDelete
+                            resourceName="booking"
+                            onConfirm={() =>
+                                deleteMutation(id, {
+                                    onSettled: () => navigate(-1),
+                                })
+                            }
+                            disabled={isDeleting}
+                        />
+                    </Modal.Window>
+                </Modal>
                 {status === "unconfirmed" && (
                     <Button onClick={() => navigate(`/checkin/${id}`)}>Check in</Button>
+                )}
+                {status === "checked-in" && (
+                    <Button
+                        onClick={() => {
+                            checkoutMutation(id);
+                        }}
+                        disabled={isCheckingOut}
+                    >
+                        Check out
+                    </Button>
                 )}
                 <Button $variation="secondary" onClick={moveBack}>
                     Back

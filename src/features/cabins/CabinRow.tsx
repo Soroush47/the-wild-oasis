@@ -11,6 +11,7 @@ import ConfirmDelete from "../../ui/ConfirmDelete";
 import Table from "../../ui/Table";
 import Menus from "../../ui/Menus";
 import { CabinType } from "../../types";
+import { useDeleteCabin } from "./useDeleteCabin";
 
 // const TableRow = styled.div`
 //     display: grid;
@@ -65,6 +66,7 @@ function CabinRow({ cabin }: CabinRowProps) {
         description,
     } = cabin;
     const { createMutation } = useCreateCabin();
+    const { isDeleting, deleteMutation } = useDeleteCabin();
 
     const handleDuplicate = () => {
         createMutation({
@@ -112,7 +114,11 @@ function CabinRow({ cabin }: CabinRowProps) {
                         <CreateCabinForm cabin={cabin} />
                     </Modal.Window>
                     <Modal.Window name="delete-cabin">
-                        <ConfirmDelete resourceName="Cabins" cabinId={cabinId} />
+                        <ConfirmDelete
+                            resourceName="cabin"
+                            onConfirm={() => deleteMutation(cabinId)}
+                            isDeleting={isDeleting}
+                        />
                     </Modal.Window>
                 </Modal>
             </div>

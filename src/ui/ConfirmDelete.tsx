@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import Button from "./Button";
 import Heading from "./Heading";
-import { useDeleteCabin } from "../features/cabins/useDeleteCabin";
+// import { useDeleteCabin } from "../features/cabins/useDeleteCabin";
 
 const StyledConfirmDelete = styled.div`
-    width: 42rem;
+    width: 47rem;
     display: flex;
     flex-direction: column;
     gap: 1.2rem;
@@ -23,24 +23,24 @@ const StyledConfirmDelete = styled.div`
 
 interface ConfirmDeleteProps {
     resourceName: string;
-    // onConfirm: () => void;
+    onConfirm: () => void;
     disabled?: boolean;
     onCloseModal?: () => void;
-    cabinId: number;
+    // id: number;
 }
 
 function ConfirmDelete({
     resourceName,
-    cabinId,
+    // id,
     onCloseModal,
+    disabled,
+    onConfirm,
 }: ConfirmDeleteProps) {
-    const { isDeleting, deleteMutation } = useDeleteCabin();
-
-    const handleDelete = () => {
-        deleteMutation(cabinId, {
-            onSuccess: () => onCloseModal?.(),
-        });
-    };
+    // const handleDelete = () => {
+    //     deleteMutation(id, {
+    //         onSuccess: () => onCloseModal?.(),
+    //     });
+    // };
 
     return (
         <StyledConfirmDelete>
@@ -51,14 +51,10 @@ function ConfirmDelete({
             </p>
 
             <div>
-                <Button
-                    $variation="secondary"
-                    disabled={isDeleting}
-                    onClick={onCloseModal}
-                >
+                <Button $variation="secondary" disabled={disabled} onClick={onCloseModal}>
                     Cancel
                 </Button>
-                <Button $variation="danger" disabled={isDeleting} onClick={handleDelete}>
+                <Button $variation="danger" disabled={disabled} onClick={onConfirm}>
                     Delete
                 </Button>
             </div>

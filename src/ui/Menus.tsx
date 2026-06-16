@@ -107,19 +107,13 @@ const MenusContext = createContext<MenusContextType | undefined>(undefined);
 function Menus({ type, children }: MenusProps) {
     const [openId, setOpenId] = useState<number | null>(null);
     const [position, setPosition] = useState<Position | null>(null);
-    // const close = useCallback(() => {
-    //     setOpenId(null);
-    //     setPosition(null);
-    // }, []);
+    
     const close = () => {
         setOpenId(null);
         setPosition(null);
         // console.log("close");
     };
-    // const open = useCallback((id: number, position: Position) => {
-    //     setPosition(position);
-    //     setOpenId(id);
-    // }, []);
+
     const open = (id: number, position: Position) => {
         setPosition(position);
         setOpenId(id);

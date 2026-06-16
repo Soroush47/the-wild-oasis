@@ -134,7 +134,6 @@ function BookingDataBox({ booking }: BookingDataBoxProps) {
         cabin: { name: cabinName },
     } = booking ?? [];
 
-    console.log({ observations });
     return (
         <StyledBookingDataBox>
             <Header>
