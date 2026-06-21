@@ -107,17 +107,19 @@ function CreateCabinForm({ cabin, onCloseModal }: CreateCabinFormProps) {
 
             <FormRow>
                 {/* type is an HTML attribute! */}
-                <Button
-                    $variation="secondary"
-                    onClick={onCloseModal}
-                    type="button"
-                    disabled={cabin ? isUpdating : isCreating}
-                >
-                    Cancel
-                </Button>
-                <Button disabled={cabin ? isUpdating : isCreating}>
-                    {cabin ? "Edit" : "Create new"} cabin
-                </Button>
+                <>
+                    <Button
+                        $variation="secondary"
+                        onClick={onCloseModal}
+                        type="button"
+                        disabled={cabin ? isUpdating : isCreating}
+                    >
+                        Cancel
+                    </Button>
+                    <Button disabled={cabin ? isUpdating : isCreating}>
+                        {cabin ? "Edit" : "Create new"} cabin
+                    </Button>
+                </>
             </FormRow>
         </Form>
     );

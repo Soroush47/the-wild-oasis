@@ -14,6 +14,7 @@ import GlobalStyles from "./styles/GlobalStyles";
 import { Toaster } from "react-hot-toast";
 import Booking from "./pages/Booking";
 import Checkin from "./pages/Checkin";
+import Signup from "./pages/SignUp";
 
 const MINUTE = 60 * 1000;
 
@@ -49,6 +50,7 @@ function App() {
                         <Route path="account" element={<Account />} />
                     </Route>
                     <Route path="login" element={<Login />} />
+                    <Route path="sign-up" element={<Signup />} />
                     <Route path="*" element={<PageNotFound />} />
                 </Routes>
             </BrowserRouter>
