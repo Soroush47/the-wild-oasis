@@ -1,8 +1,9 @@
 import { useMutation } from "@tanstack/react-query";
-import { signupUser } from "../../services/apiAuth";
-import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { AxiosError } from "axios";
+import toast from "react-hot-toast";
+
+import { signupUser } from "../../services/apiAuth";
 
 interface BackendError {
     message: string;
@@ -20,8 +21,8 @@ export function useSignup() {
             toast.success("User signed up seccessfully");
             navigate("/login");
         },
-        onError: err => {
-            const axiosError = err as AxiosError<BackendError>;
+        onError: error => {
+            const axiosError = error as AxiosError<BackendError>;
             const message =
                 axiosError.response?.data?.message || "User could not sign up";
 
