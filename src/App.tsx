@@ -14,7 +14,8 @@ import GlobalStyles from "./styles/GlobalStyles";
 import { Toaster } from "react-hot-toast";
 import Booking from "./pages/Booking";
 import Checkin from "./pages/Checkin";
-import Signup from "./pages/SignUp";
+import Signup from "./pages/Signup";
+import ProtectedRoute from "./ui/ProtectedRoute";
 
 const MINUTE = 60 * 1000;
 
@@ -38,7 +39,13 @@ function App() {
                 }}
             >
                 <Routes>
-                    <Route element={<AppLayout />}>
+                    <Route
+                        element={
+                            <ProtectedRoute>
+                                <AppLayout />
+                            </ProtectedRoute>
+                        }
+                    >
                         <Route index element={<Navigate to="dashboard" replace />} />
                         <Route path="dashboard" element={<Dashboard />} />
                         <Route path="bookings" element={<Bookings />} />

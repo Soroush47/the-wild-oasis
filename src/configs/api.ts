@@ -1,13 +1,14 @@
 import axios from "axios";
 
+const BASE_URL = "http://localhost:3001/api";
+
 const api = axios.create({
-    baseURL: "http://localhost:3001/api", //express
+    baseURL: BASE_URL, //express
     // baseURL: "http://localhost:5000",  //json-server
     headers: { "Content-Type": "application/json" },
 });
 
 api.interceptors.request.use(config => {
-    console.log("req");
     const authString = localStorage.getItem("auth_data");
     if (authString) {
         try {
@@ -19,20 +20,18 @@ api.interceptors.request.use(config => {
             }
         } catch (error) {
             console.error("Error parsing auth_data from localStorage:", error);
+            localStorage.removeItem("auth_data");
+            localStorage.removeItem("user");
         }
     } else {
         console.log("No auth_data found in localStorage");
     }
-    console.log({ config });
     return config;
 });
 
 // Refresh token
 api.interceptors.response.use(
-    response => {
-        console.log({ response });
-        return response;
-    },
+    response => response,
     async error => {
         const originalRequest = error.config;
 
@@ -44,12 +43,9 @@ api.interceptors.response.use(
                 try {
                     const authData = JSON.parse(authString);
 
-                    const response = await axios.post(
-                        "http://localhost:5000/api/auth/refresh",
-                        {
-                            refresh_token: authData.refresh_token,
-                        },
-                    );
+                    const response = await axios.post(`${BASE_URL}/auth/refresh`, {
+                        refresh_token: authData.refresh_token,
+                    });
 
                     const { session } = response.data;
 

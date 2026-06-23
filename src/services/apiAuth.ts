@@ -29,3 +29,8 @@ export const loginUser = async ({ email, password }: Login) => {
 
     return response;
 };
+
+export const getMe = async () => {
+    const response = await api.get("/auth/me");
+    return response.data;
+};
