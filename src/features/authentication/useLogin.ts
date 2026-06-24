@@ -21,6 +21,7 @@ export function useLogin() {
         mutationFn: loginUser,
         onSuccess: data => {
             const user = data?.user;
+            console.log(user);
             queryClient.setQueryData(["user"], user);
             console.log("log in successfully");
             navigate("/dashboard", { replace: true });

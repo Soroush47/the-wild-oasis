@@ -14,6 +14,7 @@ interface Login {
 }
 
 export const loginUser = async ({ email, password }: Login) => {
+    console.log({ email, password });
     const response = await api.post("/auth/log-in", { email, password });
     const { session, user } = response.data;
 

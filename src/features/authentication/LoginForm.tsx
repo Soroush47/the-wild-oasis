@@ -13,6 +13,7 @@ function LoginForm() {
 
     function handleSubmit(e: FormEvent) {
         e.preventDefault();
+        console.log({ email, password });
         if (!email || !password) return;
         loginMutation(
             { email, password },

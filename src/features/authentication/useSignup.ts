@@ -18,7 +18,7 @@ export function useSignup() {
     } = useMutation({
         mutationFn: signupUser,
         onSuccess: () => {
-            toast.success("User signed up seccessfully");
+            toast.success("Account successfully created!");
             navigate("/login");
         },
         onError: error => {
