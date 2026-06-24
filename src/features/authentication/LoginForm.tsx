@@ -14,7 +14,15 @@ function LoginForm() {
     function handleSubmit(e: FormEvent) {
         e.preventDefault();
         if (!email || !password) return;
-        loginMutation({ email, password });
+        loginMutation(
+            { email, password },
+            {
+                onSettled: () => {
+                    setEmail("");
+                    setPassword("");
+                },
+            },
+        );
     }
 
     return (

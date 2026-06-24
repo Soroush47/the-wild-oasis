@@ -27,10 +27,10 @@ export const loginUser = async ({ email, password }: Login) => {
     );
     localStorage.setItem("user", JSON.stringify(user));
 
-    return response;
+    return response.data;
 };
 
 export const getMe = async () => {
     const response = await api.get("/auth/me");
-    return response.data;
+    return response.data?.user;
 };

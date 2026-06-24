@@ -4,7 +4,12 @@ import { useQuery } from "@tanstack/react-query";
 import { getMe } from "../../services/apiAuth";
 
 export function useUser() {
-    const { data, isLoading, isError, error } = useQuery({
+    const {
+        data: user,
+        isLoading,
+        isError,
+        error,
+    } = useQuery({
         queryKey: ["user"],
         queryFn: getMe,
         retry: false,
@@ -17,5 +22,10 @@ export function useUser() {
         }
     }, [isError]);
 
-    return { user: data?.user, isLoading, error, isAuthenticated: !!data?.user };
+    return {
+        user,
+        isLoading,
+        error,
+        isAuthenticated: user?.role === "authenticated",
+    };
 }

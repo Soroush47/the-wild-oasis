@@ -1,14 +1,17 @@
-import { useMutation } from "@tanstack/react-query";
-import { loginUser } from "../../services/apiAuth";
-import toast from "react-hot-toast";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { AxiosError } from "axios";
+
+import toast from "react-hot-toast";
+
+import { loginUser } from "../../services/apiAuth";
 
 interface BackendError {
     message: string;
 }
 
 export function useLogin() {
+    const queryClient = useQueryClient();
     const navigate = useNavigate();
     const {
         data,
@@ -16,7 +19,9 @@ export function useLogin() {
         mutate: loginMutation,
     } = useMutation({
         mutationFn: loginUser,
-        onSuccess: () => {
+        onSuccess: data => {
+            const user = data?.user;
+            queryClient.setQueryData(["user"], user);
             console.log("log in successfully");
             navigate("/dashboard");
         },
