@@ -23,7 +23,7 @@ export function useLogin() {
             const user = data?.user;
             queryClient.setQueryData(["user"], user);
             console.log("log in successfully");
-            navigate("/dashboard");
+            navigate("/dashboard", { replace: true });
         },
         onError: error => {
             const axiosError = error as AxiosError<BackendError>;

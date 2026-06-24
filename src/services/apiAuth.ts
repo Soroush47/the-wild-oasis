@@ -34,3 +34,10 @@ export const getMe = async () => {
     const response = await api.get("/auth/me");
     return response.data?.user;
 };
+
+export const logout = async () => {
+    // log out from backend
+    localStorage.removeItem("auth_data");
+    localStorage.removeItem("user");
+    console.log("logout");
+};
