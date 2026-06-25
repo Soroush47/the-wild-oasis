@@ -4,6 +4,8 @@ interface User {
     fullName: string;
     email: string;
     password: string;
+    avatar?: File | null | string;
+    id?: string;
 }
 
 export const signupUser = async (user: User) => await api.post("/auth/sign-up", user);
@@ -41,4 +43,12 @@ export const logout = async () => {
     localStorage.removeItem("auth_data");
     localStorage.removeItem("user");
     console.log("logout");
+};
+
+export const updateUser = async (newUser: Partial<User>) => {
+    const response = await api.patch(`/auth/update/${newUser.id}`, newUser);
+    const updatedUser = response.data;
+    
+    localStorage.setItem("user", JSON.stringify(updatedUser));
+    return updatedUser;
 };
