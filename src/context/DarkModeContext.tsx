@@ -30,7 +30,6 @@ function DarkModeProvider({ children }: DarkModeProviderProps) {
     }, [isDarkMode]);
 
     function toggleDarkMode() {
-        console.log({ isDarkMode });
         setIsDarkMode((isDark: boolean) => !isDark);
     }
 
