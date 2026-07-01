@@ -63,7 +63,6 @@ function Filter({ filterField, options }: FilterProps) {
         <StyledFilter>
             {options.map(({ value, label }) => (
                 <FilterButton
-                    // active={!filter || filter === "all"}
                     $active={filter === value}
                     onClick={() => handleClick(value)}
                     key={value}

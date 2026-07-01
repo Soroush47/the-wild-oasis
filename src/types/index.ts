@@ -25,16 +25,15 @@ export interface BookingType {
     observations: string;
     // cabinId: number;
     // guestId: number;
-    cabin: { name: string };
+    cabin?: { name: string };
     guest: {
         fullName: string;
-        email: string;
+        email?: string;
         nationality?: string;
         countryFlag?: string;
         nationalID?: string;
     };
 }
-
 
 export interface Settings {
     minBookingLength: number;
