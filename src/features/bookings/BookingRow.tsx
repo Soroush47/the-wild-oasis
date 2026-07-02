@@ -57,12 +57,14 @@ function BookingRow({
         totalPrice,
         status,
         guest: { fullName: guestName, email },
-        cabin: { name: cabinName },
+        cabin,
     },
 }: BookingRowProps) {
     const navigate = useNavigate();
     const { checkoutMutation } = useCheckout();
     const { deleteMutation, isDeleting } = useDeleteBooking();
+
+    const cabinName = cabin?.name;
 
     const statusToTagName = {
         unconfirmed: "blue",

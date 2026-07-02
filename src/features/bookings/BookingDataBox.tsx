@@ -131,8 +131,10 @@ function BookingDataBox({ booking }: BookingDataBoxProps) {
             countryFlag,
             nationalID,
         },
-        cabin: { name: cabinName },
+        cabin,
     } = booking ?? [];
+
+    const cabinName = cabin?.name;
 
     return (
         <StyledBookingDataBox>
