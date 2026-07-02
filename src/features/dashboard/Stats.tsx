@@ -31,6 +31,7 @@ function Stats({ bookings, confirmedStays, numDays, cabinsCount }: StatsProps) {
           ) + "%"
         : "-";
 
+    console.log({ checkins, confirmedStays });
     return (
         <>
             <Stat

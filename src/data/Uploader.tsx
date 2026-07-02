@@ -140,12 +140,12 @@ function Uploader() {
         setIsLoading(false);
     }
 
-    // async function uploadBookings() {
-    //     setIsLoading(true);
-    //     await deleteBookings();
-    //     await createBookings();
-    //     setIsLoading(false);
-    // }
+    async function uploadBookings() {
+        setIsLoading(true);
+        await deleteBookings();
+        await createBookings();
+        setIsLoading(false);
+    }
 
     return (
         <div
@@ -166,10 +166,7 @@ function Uploader() {
                 Upload ALL
             </Button>
 
-            <Button
-                // onClick={   uploadBookings}
-                disabled={isLoading}
-            >
+            <Button onClick={uploadBookings} disabled={isLoading}>
                 Upload bookings ONLY
             </Button>
         </div>

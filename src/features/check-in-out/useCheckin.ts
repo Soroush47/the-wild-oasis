@@ -34,6 +34,12 @@ export function useCheckin() {
                 queryKey: ["bookings"],
                 refetchType: "none",
             });
+            queryClient.invalidateQueries({
+                queryKey: ["today-activity"],
+            });
+            queryClient.invalidateQueries({
+                queryKey: ["stays"],
+            });
             naviagate("/");
         },
         onError: () => toast.error("The booking could not be check in"),
