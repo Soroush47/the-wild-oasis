@@ -1,6 +1,6 @@
 # The Wild Oasis
 
-A modern hotel management dashboard built with **React, TypeScript, and a custom Express + PostgreSQL backend**, designed to manage cabins, bookings, guests, and business operations through a scalable and production-oriented architecture.
+A modern hotel management dashboard built with **React, TypeScript, and a custom Express + Prisma + PostgreSQL backend**, designed to manage cabins, bookings, guests, and business operations through a scalable and production-oriented architecture.
 
 This project demonstrates advanced frontend engineering practices including React design patterns, state management strategies, and real-world API integration.
 
@@ -35,6 +35,10 @@ The application is built with a strong focus on scalability, maintainability, an
 - Form validation with schema-based rules
 - Toast notifications for user feedback
 - Responsive UI design
+- Authentication & Authorization system
+- Interactive charts (Recharts)
+- Advanced analytics dashboard
+- Real-time updates
 
 ---
 
@@ -197,7 +201,7 @@ Custom backend built with:
 
 ---
 
-## Authentication & Authorization (Planned)
+## Authentication & Authorization
 
 * JWT Authentication
 * Refresh Token flow
@@ -206,7 +210,7 @@ Custom backend built with:
 
 ---
 
-## Dark Mode (Planned)
+## Dark Mode
 
 * Implemented using CSS Variables
 * Theme switching architecture prepared for scalability
@@ -260,10 +264,6 @@ npm run build
 
 ## Future Improvements
 
-- Authentication & Authorization system
-- Interactive charts (Recharts)
-- Advanced analytics dashboard
-- Real-time updates
 - Testing (unit + integration + e2e)
 - CI/CD pipeline
 - Dockerization

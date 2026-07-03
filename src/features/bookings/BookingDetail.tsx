@@ -16,6 +16,7 @@ import { useCheckout } from "../check-in-out/useCheckout";
 import { useDeleteBooking } from "./useDeleteBooking";
 import Modal from "../../ui/Modal";
 import ConfirmDelete from "../../ui/ConfirmDelete";
+import Empty from "../../ui/Empty";
 
 const HeadingGroup = styled.div`
     display: flex;
@@ -32,8 +33,8 @@ function BookingDetail() {
     const { checkoutMutation, isCheckingOut } = useCheckout();
     const { deleteMutation, isDeleting } = useDeleteBooking();
 
-    const status = data?.data.status as Status;
-    const id = data?.data.id;
+    const status = data?.data?.status as Status;
+    const id = data?.data?.id;
 
     const statusToTagName = {
         unconfirmed: "blue",
@@ -42,6 +43,7 @@ function BookingDetail() {
     };
 
     if (isLoading) return <Spinner />;
+    if (!data?.data) return <Empty resourceName="booking" />;
     if (error) return null;
 
     console.log(data?.data);
