@@ -187,7 +187,7 @@ function List({ id, children }: ListProps) {
 
         window.addEventListener("scroll", handleClose, true);
         return () => window.removeEventListener("scroll", handleClose, true);
-    }, [close, openId, position]);
+    }, [id, close, openId, position]);
 
     if (openId !== id || position === null) return null;
 
