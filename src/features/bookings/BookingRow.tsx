@@ -72,6 +72,8 @@ function BookingRow({
         "checked-out": "silver",
     };
 
+    const listItemCount = status === "checked-out" ? 2 : 3;
+
     return (
         <Table.Row>
             <Cabin>{cabinName}</Cabin>
@@ -99,7 +101,7 @@ function BookingRow({
             <Amount>{formatCurrency(totalPrice)}</Amount>
             <Modal>
                 <Menus.Menu>
-                    <Menus.Toggle id={bookingId} />
+                    <Menus.Toggle id={bookingId} itemCount={listItemCount} />
                     <Menus.List id={bookingId}>
                         <Menus.Button
                             icon={<HiEye />}

@@ -2,15 +2,12 @@ import styled from "styled-components";
 
 import {
     createContext,
-    // memo,
-    // MouseEvent,
     PointerEvent,
     ReactNode,
     RefObject,
-    // useCallback,
+    useCallback,
     useContext,
     useEffect,
-    // useMemo,
     useRef,
     useState,
 } from "react";
@@ -107,17 +104,18 @@ const MenusContext = createContext<MenusContextType | undefined>(undefined);
 function Menus({ type, children }: MenusProps) {
     const [openId, setOpenId] = useState<number | null>(null);
     const [position, setPosition] = useState<Position | null>(null);
-    
-    const close = () => {
+
+    const close = useCallback(() => {
         setOpenId(null);
         setPosition(null);
         // console.log("close");
-    };
+    }, []);
 
-    const open = (id: number, position: Position) => {
-        setPosition(position);
+    const open = useCallback((id: number, newPosition: Position) => {
+        setPosition(newPosition);
         setOpenId(id);
-    };
+    }, []);
+
     const toggleRef = useRef<HTMLButtonElement>(null);
     const listRef = useOutsideClick<HTMLUListElement, HTMLButtonElement>(
         close,
@@ -139,16 +137,19 @@ function Menus({ type, children }: MenusProps) {
 
 interface ToggleProps {
     id: number;
+    itemCount?: number;
 }
 
-function Toggle({ id }: ToggleProps) {
-    const { type, openId, open, close, toggleRef } = useMenus();
+function Toggle({ id, itemCount = 3 }: ToggleProps) {
+    const { openId, open, close, toggleRef } = useMenus();
 
     const handleClick = (e: PointerEvent<HTMLButtonElement>) => {
         const rect = (e.target as Element).closest("button")?.getBoundingClientRect();
 
         if (!rect) return null;
-        const contextMenuHeight = type === "cabin" ? 120 : 40;
+
+        console.log({ toggleItemCount: itemCount });
+        const contextMenuHeight = itemCount * 40;
         const position = {
             x: window.innerWidth - rect.left + 4,
             y:
@@ -181,12 +182,12 @@ function List({ id, children }: ListProps) {
     // console.log(ref);
     // console.log(listRef);
     useEffect(() => {
+        if (openId !== id || position === null) return;
         const handleClose = () => close();
 
         window.addEventListener("scroll", handleClose, true);
         return () => window.removeEventListener("scroll", handleClose, true);
-    }, [close]);
-    // console.log("list");
+    }, [close, openId, position]);
 
     if (openId !== id || position === null) return null;
 

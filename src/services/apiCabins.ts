@@ -4,7 +4,7 @@ import api from "../configs/api";
 
 export async function getCabins() {
     const res = await api.get("/cabins");
-    console.log(res.data);
+    // console.log(res.data);
     return res;
 }
 

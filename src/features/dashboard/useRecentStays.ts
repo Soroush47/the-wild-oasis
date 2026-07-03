@@ -19,7 +19,7 @@ export function useRecentStays() {
 
     const stays = data?.data;
 
-    console.log({ stays });
+    // console.log({ stays });
 
     const confirmedStays = stays?.filter(
         (stay: BookingType) =>

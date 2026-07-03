@@ -42,7 +42,7 @@ const NoActivity = styled.p`
 
 function TodayActivity() {
     const { activities, isActivitiesLoading } = useTodayActivity();
-    console.log({ activities, isActivitiesLoading });
+    // console.log({ activities, isActivitiesLoading });
     return (
         <StyledToday>
             <Row type="horizontal">
@@ -57,7 +57,7 @@ function TodayActivity() {
                         ))}
                     </TodayList>
                 ) : (
-                    <NoActivity></NoActivity>
+                    <NoActivity>No activity today...</NoActivity>
                 )
             ) : (
                 <Spinner />

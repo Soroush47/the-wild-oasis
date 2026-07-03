@@ -23,7 +23,7 @@ export async function getBookings(filter: Filter, sortBy: SortBy, page: number) 
     if (sortBy !== "createdAt-asc") url += `sortBy=${sortBy}`;
 
     const res = await api.get(url);
-    console.log(res.data);
+    // console.log(res.data);
     return res;
 }
 
@@ -50,7 +50,7 @@ export async function getStaysAfterDate(queryDate: Date) {
         queryDate,
         today: getToday(),
     };
-    console.log(date);
+    // console.log(date);
     const response = await api.get("/bookings/stays-after-date", { params: date });
     return response;
 }
