@@ -9,14 +9,13 @@ const api = axios.create({
 
 api.interceptors.request.use(config => {
     const authString = localStorage.getItem("auth_data");
-    console.log({ BASE_URL });
     if (authString) {
         try {
             const authData = JSON.parse(authString);
 
             if (authData && authData.access_token) {
                 config.headers.Authorization = `Bearer ${authData.access_token}`;
-                console.log("Token attached successfully");
+                // console.log("Token attached successfully");
             }
         } catch (error) {
             console.error("Error parsing auth_data from localStorage:", error);
@@ -24,7 +23,7 @@ api.interceptors.request.use(config => {
             localStorage.removeItem("user");
         }
     } else {
-        console.log("No auth_data found in localStorage");
+        // console.log("No auth_data found in localStorage");
     }
     return config;
 });
