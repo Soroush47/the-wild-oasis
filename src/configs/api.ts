@@ -9,6 +9,7 @@ const api = axios.create({
 
 api.interceptors.request.use(config => {
     const authString = localStorage.getItem("auth_data");
+    console.log({ BASE_URL });
     if (authString) {
         try {
             const authData = JSON.parse(authString);
