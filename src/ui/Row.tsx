@@ -1,7 +1,9 @@
 import styled, { css } from "styled-components";
+import { medias } from "../styles/medias";
 
 interface RowProps {
     type?: "horizontal" | "vertical";
+    responsive?: boolean;
 }
 
 const Row = styled.div<RowProps>`
@@ -17,7 +19,16 @@ const Row = styled.div<RowProps>`
         props.type === "vertical" &&
         css`
             flex-direction: column;
-            gap: 1.6rem;
+            gap: var(--space-4);
+        `}
+    ${({ responsive }) =>
+        responsive &&
+        css`
+            ${medias.desktop} {
+                flex-direction: column;
+                align-items: stretch;
+                gap: var(--space-4);
+            }
         `}
 `;
 

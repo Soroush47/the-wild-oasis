@@ -1,11 +1,17 @@
 import { useEffect, useRef } from "react";
 
 type Action = () => void;
+type EventType = "pointerdown" | "pointerup" | null;
 
 export function useOutsideClick<
     T1 extends HTMLElement,
     T2 extends HTMLElement = HTMLElement,
->(action: Action, listenCapturing = true, extraRef?: React.RefObject<T2 | null>) {
+>(
+    action: Action,
+    listenCapturing = true,
+    extraRef?: React.RefObject<T2 | null>,
+    eventType?: EventType,
+) {
     const ref = useRef<T1 | null>(null);
 
     // console.log(ref);
@@ -33,16 +39,24 @@ export function useOutsideClick<
             }
         };
         // console.log("useOutsideClick");
-        document.addEventListener("pointerdown", handleClick, true);
+        document.addEventListener(
+            eventType || "pointerdown",
+            handleClick,
+            listenCapturing,
+        );
         // document.addEventListener("mousedown", handleClick, listenCapturing);
         // document.addEventListener("touchstart", handleClick, listenCapturing);
 
         return () => {
-            document.removeEventListener("pointerdown", handleClick, true);
+            document.removeEventListener(
+                eventType || "pointerdown",
+                handleClick,
+                listenCapturing,
+            );
             // document.removeEventListener("mousedown", handleClick, listenCapturing);
             // document.removeEventListener("touchstart", handleClick, listenCapturing);
         };
-    }, [action, extraRef, listenCapturing]);
+    }, [action, extraRef, listenCapturing, eventType]);
     // console.log("close");
 
     return ref;

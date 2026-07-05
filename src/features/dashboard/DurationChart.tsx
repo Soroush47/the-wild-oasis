@@ -3,6 +3,8 @@ import { BookingType } from "../../types";
 import Heading from "../../ui/Heading";
 import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 import { useDarkMode } from "../../context/DarkModeContext";
+import { medias } from "../../styles/medias";
+import { useMediaQuery } from "../../hooks/useMediaQuery";
 
 const ChartBox = styled.div`
     /* Box */
@@ -10,7 +12,7 @@ const ChartBox = styled.div`
     border: 1px solid var(--color-grey-100);
     border-radius: var(--border-radius-md);
 
-    padding: 2.4rem 3.2rem;
+    padding: var(--space-5) var(--space-6);
     grid-column: 3 / span 2;
 
     & > *:first-child {
@@ -19,6 +21,14 @@ const ChartBox = styled.div`
 
     & .recharts-pie-label-text {
         font-weight: 600;
+    }
+
+    ${medias.wideDesktop} {
+        grid-column: 1 / -1;
+    }
+
+    ${medias.mobile} {
+        padding: var(--space-4);
     }
 `;
 
@@ -147,6 +157,7 @@ interface DurationChartProps {
 
 function DurationChart({ confirmedStays }: DurationChartProps) {
     const { isDarkMode } = useDarkMode();
+    const isMobile = useMediaQuery("(max-width: 768px)");
 
     const startData = isDarkMode ? startDataDark : startDataLight;
 
@@ -161,9 +172,9 @@ function DurationChart({ confirmedStays }: DurationChartProps) {
                         data={data}
                         nameKey="duration"
                         dataKey="value"
-                        innerRadius={85}
-                        outerRadius={110}
-                        cx="40%"
+                        cx={isMobile ? "50%" : "40%"}
+                        innerRadius={isMobile ? 60 : 85}
+                        outerRadius={isMobile ? 80 : 110}
                         cy="50%"
                         paddingAngle={3}
                     >
@@ -177,10 +188,10 @@ function DurationChart({ confirmedStays }: DurationChartProps) {
                     </Pie>
                     <Tooltip />
                     <Legend
-                        verticalAlign="middle"
-                        align="right"
-                        width="30%"
-                        layout="vertical"
+                        verticalAlign={isMobile ? "bottom" : "middle"}
+                        align={isMobile ? "center" : "right"}
+                        width={isMobile ? "100%" : "30%"}
+                        layout={isMobile ? "horizontal" : "vertical"}
                         iconSize={15}
                         iconType="circle"
                     />

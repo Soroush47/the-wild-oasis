@@ -6,6 +6,7 @@ import { useTodayActivity } from "./useTodayActivity";
 import Spinner from "../../ui/Spinner";
 import TodayItem from "./TodayItem";
 import { BookingType } from "../../types";
+import { medias } from "../../styles/medias";
 
 const StyledToday = styled.div`
     /* Box */
@@ -14,17 +15,24 @@ const StyledToday = styled.div`
     border-radius: var(--border-radius-md);
 
     padding: 3.2rem;
+    padding-top: 2.4rem;
+
     display: flex;
     flex-direction: column;
     gap: 2.4rem;
+
     grid-column: 1 / span 2;
-    padding-top: 2.4rem;
+
+    ${medias.mobile} {
+        grid-column: 1 / -1;
+        padding: 2rem;
+    }
 `;
 
 const TodayList = styled.ul`
-    overflow: scroll;
+    /* overflow-y: scroll; */
+    overflow-y: auto;
     overflow-x: hidden;
-
     /* Removing scrollbars for webkit, firefox, and ms, respectively */
     &::-webkit-scrollbar {
         width: 0 !important;

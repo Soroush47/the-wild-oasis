@@ -43,9 +43,12 @@ const Title = styled.h5`
 `;
 
 const Value = styled.p`
-    font-size: 2.4rem;
+    /* font-size: 2.4rem;
     line-height: 1;
-    font-weight: 500;
+    font-weight: 500; */
+    font-size: clamp(2rem, 1.4vw, 2.4rem); // Fluid Typography
+    line-height: 1.1;
+    font-weight: 600;
 `;
 
 interface StatProps {

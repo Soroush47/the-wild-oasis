@@ -9,6 +9,9 @@ const StyledFilter = styled.div`
     padding: 0.4rem;
     display: flex;
     gap: 0.4rem;
+
+    max-width: max-content;
+    /* justify-content: space-around; */
 `;
 
 interface FilterButtonProps {

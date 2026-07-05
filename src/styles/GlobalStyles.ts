@@ -3,6 +3,13 @@ import { createGlobalStyle } from "styled-components";
 const GlobalStyles = createGlobalStyle`
 :root {
   
+  --space-1: 0.4rem;
+    --space-2: 0.8rem;
+    --space-3: 1.2rem;
+    --space-4: 1.6rem;
+    --space-5: 2.4rem;
+    --space-6: 3.2rem;
+    --space-7: 4.8rem;
 
   /* Grey */
   &, &.ligh-mode{
@@ -34,7 +41,8 @@ const GlobalStyles = createGlobalStyle`
     --color-red-700: #b91c1c;
     --color-red-800: #991b1b;
     
-    --backdrop-color: rgba(255, 255, 255, 0.1);
+    /* --backdrop-color: rgba(255, 255, 255, 0.1); */
+    --backdrop-color: rgba(152, 162, 189, 0.35);
     
     --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
     --shadow-md: 0px 0.6rem 2.4rem rgba(0, 0, 0, 0.06);
@@ -72,7 +80,8 @@ const GlobalStyles = createGlobalStyle`
     --color-red-700: #b91c1c;
     --color-red-800: #991b1b;
 
-    --backdrop-color: rgba(0, 0, 0, 0.3);
+    /* --backdrop-color: rgba(0, 0, 0, 0.3); */
+    --backdrop-color: rgba(0, 0, 0, 0.55);
 
     --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
     --shadow-md: 0px 0.6rem 2.4rem rgba(0, 0, 0, 0.3);
@@ -112,6 +121,7 @@ const GlobalStyles = createGlobalStyle`
 
 html {
   font-size: 62.5%;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -120,8 +130,10 @@ body {
 
   transition: color 0.3s, background-color 0.3s;
   min-height: 100vh;
+  min-height: 100dvh;
   line-height: 1.5;
   font-size: 1.6rem;
+  overflow-y: hidden;
 }
 
 input,
@@ -180,11 +192,18 @@ h6 {
 }
 
 img {
+  /* display: block; */
   max-width: 100%;
+  /* height: auto; */
 
   /* For dark mode */
   filter: grayscale(var(--image-grayscale)) opacity(var(--image-opacity));
 }
+
+/* ::selection {
+  background-color: var(--color-brand-600);
+  color: white;
+} */
 
 /*
 FOR DARK MODE

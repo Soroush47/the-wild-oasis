@@ -8,6 +8,10 @@ import Stat from "./Stat";
 import { BookingType } from "../../types";
 import { formatCurrency } from "../../utils/helpers";
 
+// const StyledStats = styled.div`
+//     display: grid;
+// `;
+
 interface StatsProps {
     bookings: BookingType[];
     confirmedStays: BookingType[];

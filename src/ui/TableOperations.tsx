@@ -1,9 +1,21 @@
-import styled from 'styled-components';
+import styled from "styled-components";
+import { medias } from "../styles/medias";
 
 const TableOperations = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 1.6rem;
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+
+    ${medias.desktop} {
+        justify-content: space-between;
+    }
+    ${medias.tablet} {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    ${medias.mobile} {
+        gap: var(--space-3);
+    }
 `;
 
 export default TableOperations;
