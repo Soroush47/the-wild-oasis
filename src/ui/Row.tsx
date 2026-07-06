@@ -4,6 +4,7 @@ import { medias } from "../styles/medias";
 interface RowProps {
     type?: "horizontal" | "vertical";
     responsive?: boolean;
+    responsiveReverse?: boolean;
 }
 
 const Row = styled.div<RowProps>`
@@ -26,6 +27,15 @@ const Row = styled.div<RowProps>`
         css`
             ${medias.desktop} {
                 flex-direction: column;
+                align-items: stretch;
+                gap: var(--space-4);
+            }
+        `}
+    ${({ responsiveReverse }) =>
+        responsiveReverse &&
+        css`
+            ${medias.desktop} {
+                flex-direction: column-reverse;
                 align-items: stretch;
                 gap: var(--space-4);
             }

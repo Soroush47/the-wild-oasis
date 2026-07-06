@@ -20,8 +20,10 @@ import Empty from "../../ui/Empty";
 
 const HeadingGroup = styled.div`
     display: flex;
-    gap: 2.4rem;
+    column-gap: 2.4rem;
+    row-gap: 1.2rem;
     align-items: center;
+    flex-wrap: wrap;
 `;
 
 type Status = "unconfirmed" | "checked-in" | "checked-out";
@@ -50,7 +52,7 @@ function BookingDetail() {
 
     return (
         <>
-            <Row type="horizontal">
+            <Row type="horizontal" responsiveReverse>
                 <HeadingGroup>
                     <Heading as="h1">Booking #{id}</Heading>
                     <Tag type={statusToTagName[status]}>{status.replace("-", " ")}</Tag>

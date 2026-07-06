@@ -41,7 +41,7 @@ const StyledSidebar = styled.aside<StyledSidebarProps>`
         /* transition: transform 0.3s ease; */
         transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 
-        &::-webkit-scrollbar {
+        &::-webkit-scrollbar {  
             width: 0 !important;
         }
         scrollbar-width: none;

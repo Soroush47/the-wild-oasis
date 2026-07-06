@@ -12,6 +12,7 @@ import { Flag } from "../../ui/Flag";
 
 import { formatDistanceFromNow, formatCurrency } from "../../utils/helpers";
 import { BookingType } from "../../types";
+import { medias } from "../../styles/medias";
 
 const StyledBookingDataBox = styled.section`
     /* Box */
@@ -31,6 +32,9 @@ const Header = styled.header`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    column-gap: 2.4rem;
+    row-gap: 1.2rem;
+    flex-wrap: wrap;
 
     svg {
         height: 3.2rem;
@@ -50,10 +54,33 @@ const Header = styled.header`
         font-size: 2rem;
         margin-left: 4px;
     }
+
+    ${medias.tablet} {
+        padding: 2rem;
+
+        font-size: 1.4rem;
+
+        & div:first-child {
+            font-size: 1.6rem;
+        }
+    }
+    ${medias.mobile} {
+        padding: 1.6rem;
+
+        font-size: 1.2rem;
+
+        & div:first-child {
+            font-size: 1.4rem;
+        }
+    }
 `;
 
 const Section = styled.section`
     padding: 3.2rem 4rem 1.2rem;
+
+    ${medias.mobile} {
+        padding: 2rem;
+    }
 `;
 
 const Guest = styled.div`
@@ -63,9 +90,25 @@ const Guest = styled.div`
     margin-bottom: 1.6rem;
     color: var(--color-grey-500);
 
+    & p {
+        display: flex;
+        gap: 1.2rem;
+        white-space: nowrap;
+    }
+
     & p:first-of-type {
         font-weight: 500;
         color: var(--color-grey-700);
+    }
+
+    ${medias.tablet} {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.8rem;
+
+        & span {
+            display: none;
+        }
     }
 `;
 
@@ -80,6 +123,9 @@ const Price = styled.div<PriceProps>`
     padding: 1.6rem 3.2rem;
     border-radius: var(--border-radius-sm);
     margin-top: 2.4rem;
+    flex-wrap: wrap;
+    column-gap: 1.6rem;
+    row-gap: 1.8rem;
 
     background-color: ${props =>
         props.$isPaid ? "var(--color-green-100)" : "var(--color-yellow-100)"};
@@ -97,6 +143,18 @@ const Price = styled.div<PriceProps>`
         width: 2.4rem;
         color: currentColor !important;
     }
+
+    ${medias.tablet} {
+        padding: 1.2rem 2.4rem;
+    }
+
+    ${medias.mobile} {
+        font-size: 1.4rem;
+
+        & p:last-child {
+        font-size: 1.2rem;
+    }
+    }
 `;
 
 const Footer = styled.footer`
@@ -104,6 +162,10 @@ const Footer = styled.footer`
     font-size: 1.2rem;
     color: var(--color-grey-500);
     text-align: right;
+
+    ${medias.mobile} {
+        padding: 1.4rem 2rem;
+    }
 `;
 
 interface BookingDataBoxProps {
@@ -157,14 +219,20 @@ function BookingDataBox({ booking }: BookingDataBoxProps) {
 
             <Section>
                 <Guest>
-                    {countryFlag && <Flag src={countryFlag} alt={`Flag of ${country}`} />}
                     <p>
+                        {countryFlag && (
+                            <Flag src={countryFlag} alt={`Flag of ${country}`} />
+                        )}
                         {guestName} {numGuests > 1 ? `+ ${numGuests - 1} guests` : ""}
                     </p>
-                    <span>&bull;</span>
-                    <p>{email}</p>
-                    <span>&bull;</span>
-                    <p>National ID {nationalID}</p>
+                    <p>
+                        <span>&bull;</span>
+                        {email}
+                    </p>
+                    <p>
+                        <span>&bull;</span>
+                        National ID {nationalID}
+                    </p>
                 </Guest>
 
                 {observations && (
