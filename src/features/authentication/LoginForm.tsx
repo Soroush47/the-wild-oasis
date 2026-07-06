@@ -37,10 +37,12 @@ function LoginForm() {
                     value={email}
                     onChange={e => setEmail(e.target.value)}
                     disabled={isLogingIn}
+                    $login
                 />
             </FormRowVertical>
             <FormRowVertical label="Password">
                 <Input
+                    $login
                     type="password"
                     id="password"
                     autoComplete="current-password"

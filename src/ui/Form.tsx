@@ -16,11 +16,7 @@ const Form = styled.form<FormProps>`
     ${props =>
         props.type === "regular" &&
         css`
-            /* max-height: 80vh; */
-            /* max-width: 117.1rem; */
             width: 100%;
-            /* width: 80vw; */
-            /* overflow-y: auto; */
 
             padding: 2.4rem 4rem;
 
@@ -36,9 +32,11 @@ const Form = styled.form<FormProps>`
             max-height: 80vh;
             max-width: 80rem;
             width: 80vw;
-            /* overflow-y: auto; */
             ${medias.laptop} {
                 width: 73vw;
+            }
+            ${medias.mobile} {
+                padding: 0rem 1rem;
             }
         `}
     
