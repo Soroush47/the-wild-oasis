@@ -1,7 +1,9 @@
 import { createContext, ReactNode, useContext } from "react";
 import styled from "styled-components";
 
-const TableContainer = styled.div`
+const TableContainer = styled.div.attrs({
+    id: "table-div",
+})`
     overflow-x: auto;
     width: 100%;
 

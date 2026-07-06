@@ -13,9 +13,9 @@ const LoginLayout = styled.main`
     gap: 4rem;
     align-content: flex-start;
     background-color: var(--color-grey-50);
-    padding: 4rem 10rem;
+    padding: 6rem 10rem;
     ${medias.mobile} {
-        padding: 4rem;
+        padding: 5rem 4rem;
     }
 `;
 

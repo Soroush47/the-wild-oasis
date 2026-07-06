@@ -3,6 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 import { PAGE_SIZE } from "../utils/constants";
 import { scrollToTop } from "../utils/scrollToTop";
+import { scrollToLeft } from "../utils/scrollToLeft";
 
 const StyledPagination = styled.div`
     width: 100%;
@@ -77,6 +78,7 @@ function Pagination({ count = 0 }: PaginationProps) {
         searchParams.set("page", String(page));
         setSearchParams(searchParams);
         scrollToTop();
+        scrollToLeft()
     };
 
     const nextPage = () => goToPage(currentPage + 1);
