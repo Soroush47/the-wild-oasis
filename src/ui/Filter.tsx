@@ -1,5 +1,6 @@
 import { useSearchParams } from "react-router-dom";
 import styled, { css } from "styled-components";
+import { medias } from "../styles/medias";
 
 const StyledFilter = styled.div`
     border: 1px solid var(--color-grey-100);
@@ -12,6 +13,10 @@ const StyledFilter = styled.div`
 
     max-width: max-content;
     /* justify-content: space-around; */
+
+    ${medias.mobile} {
+        gap: 0.32rem;
+    }
 `;
 
 interface FilterButtonProps {
@@ -35,10 +40,20 @@ const FilterButton = styled.button<FilterButtonProps>`
     /* To give the same height as select */
     padding: 0.44rem 0.8rem;
     transition: all 0.3s;
+    white-space: nowrap;
 
     &:hover:not(:disabled) {
         background-color: var(--color-brand-600);
         color: var(--color-brand-50);
+    }
+
+    ${medias.mobile} {
+        font-size: 1.2rem;
+        padding: 0.4rem 0.7rem;
+    }
+    ${medias.smallMobile} {
+        font-size: 1rem;
+        padding: 0.38rem 0.64rem;
     }
 `;
 

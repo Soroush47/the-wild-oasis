@@ -22,9 +22,21 @@ const ChartBox = styled.div`
     & .recharts-pie-label-text {
         font-weight: 600;
     }
+    & .recharts-default-legend {
+        display: flex !important;
+        gap: var(--space-4);
+        flex-direction: column;
+    }
 
     ${medias.wideDesktop} {
         grid-column: 1 / -1;
+    }
+
+    ${medias.tablet} {
+        & .recharts-default-legend {
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
     }
 
     ${medias.mobile} {
@@ -157,25 +169,41 @@ interface DurationChartProps {
 
 function DurationChart({ confirmedStays }: DurationChartProps) {
     const { isDarkMode } = useDarkMode();
-    const isMobile = useMediaQuery("(max-width: 768px)");
+    const isTablet = useMediaQuery("(max-width: 768px)");
 
     const startData = isDarkMode ? startDataDark : startDataLight;
 
     const data = prepareData(startData, confirmedStays);
 
+    const colors = isDarkMode
+        ? {
+              totalSales: { stroke: "#4f46e5", fill: "#4f46e5" },
+              extrasSales: { stroke: "#22c55e", fill: "#22c55e" },
+              text: "#e5e7eb",
+              background: "#18212f",
+              boxShadow: "#000000e8",
+          }
+        : {
+              totalSales: { stroke: "#4f46e5", fill: "#c7d2fe" },
+              extrasSales: { stroke: "#16a34a", fill: "#dcfce7" },
+              text: "#374151",
+              background: "#ffffff",
+              boxShadow: "#aba5a56c",
+          };
+
     return (
         <ChartBox>
             <Heading as="h2">Stay duration summary</Heading>
-            <ResponsiveContainer width="100%" height={240}>
+            <ResponsiveContainer width="100%" height={300}>
                 <PieChart>
                     <Pie
                         data={data}
                         nameKey="duration"
                         dataKey="value"
-                        cx={isMobile ? "50%" : "40%"}
-                        innerRadius={isMobile ? 60 : 85}
-                        outerRadius={isMobile ? 80 : 110}
-                        cy="50%"
+                        cx={isTablet ? "50%" : "40%"}
+                        innerRadius={isTablet ? 60 : 85}
+                        outerRadius={isTablet ? 80 : 110}
+                        cy={isTablet ? "45%" : "50%"}
                         paddingAngle={3}
                     >
                         {data.map(entry => (
@@ -186,12 +214,19 @@ function DurationChart({ confirmedStays }: DurationChartProps) {
                             />
                         ))}
                     </Pie>
-                    <Tooltip />
+                    <Tooltip
+                        contentStyle={{
+                            backgroundColor: colors.background,
+                            borderRadius: "8px",
+                            border: "none",
+                            boxShadow: `0px 0px 9px 0px ${colors.boxShadow}`,
+                        }}
+                    />
                     <Legend
-                        verticalAlign={isMobile ? "bottom" : "middle"}
-                        align={isMobile ? "center" : "right"}
-                        width={isMobile ? "100%" : "30%"}
-                        layout={isMobile ? "horizontal" : "vertical"}
+                        verticalAlign={isTablet ? "bottom" : "middle"}
+                        align={isTablet ? "center" : "right"}
+                        width={isTablet ? "100%" : "30%"}
+                        layout={isTablet ? "horizontal" : "vertical"}
                         iconSize={15}
                         iconType="circle"
                     />

@@ -20,12 +20,17 @@ const Cabin = styled.div`
     font-weight: 600;
     color: var(--color-grey-600);
     font-family: "Sono";
+    white-space: nowrap;
 `;
 
 const Stacked = styled.div`
     display: flex;
     flex-direction: column;
     gap: 0.2rem;
+
+    & span {
+        white-space: nowrap;
+    }
 
     & span:first-child {
         font-weight: 500;
@@ -40,6 +45,7 @@ const Stacked = styled.div`
 const Amount = styled.div`
     font-family: "Sono";
     font-weight: 500;
+    white-space: nowrap;
 `;
 
 interface BookingRowProps {

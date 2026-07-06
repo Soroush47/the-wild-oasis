@@ -1,4 +1,5 @@
 import styled, { css, RuleSet } from "styled-components";
+import { medias } from "../styles/medias";
 
 type SizeVariant = "small" | "medium" | "large";
 type VariationVariant = "primary" | "secondary" | "danger";
@@ -16,6 +17,11 @@ const sizes: Record<SizeVariant, RuleSet<object>> = {
         font-size: 1.4rem;
         padding: 1.2rem 1.6rem;
         font-weight: 500;
+        ${medias.mobile} {
+            font-size: 1.2rem;
+            padding: 0.9rem 1rem;
+            font-weight: 500;
+        }
     `,
     large: css`
         font-size: 1.6rem;

@@ -21,6 +21,9 @@ const StyledHeader = styled.header`
         padding: 1.2rem 2rem;
         justify-content: space-between;
     }
+    ${medias.mobile} {
+        padding: 1rem;
+    }
 `;
 
 const MenuButton = styled(ButtonIcon)`
@@ -35,6 +38,9 @@ const RightSection = styled.div`
     display: flex;
     align-items: center;
     gap: 2.4rem;
+    ${medias.mobile} {
+        gap: 1rem;
+    }
 `;
 
 function Header() {

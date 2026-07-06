@@ -1,5 +1,6 @@
 import { ChangeEvent } from "react";
 import styled from "styled-components";
+import { medias } from "../styles/medias";
 
 interface StyledSelectProps {
     type?: string;
@@ -16,6 +17,16 @@ const StyledSelect = styled.select<StyledSelectProps>`
     font-weight: 500;
     box-shadow: var(--shadow-sm);
     cursor: pointer;
+    transition: all 0.3s;
+
+    ${medias.mobile} {
+        font-size: 1.2rem;
+        padding: 0.72rem 0.8rem;
+    }
+    ${medias.smallMobile} {
+        font-size: 1rem;
+        padding: 0.72rem 0.75rem;
+    }
 `;
 
 type Option = {

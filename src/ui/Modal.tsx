@@ -11,6 +11,8 @@ import { createPortal } from "react-dom";
 import { HiXMark } from "react-icons/hi2";
 import styled from "styled-components";
 import { useOutsideClick } from "../hooks/useOutsideClick";
+import { medias } from "../styles/medias";
+import { useLockBodyScroll } from "../hooks/useLockBodyScroll";
 
 const StyledModal = styled.div`
     position: fixed;
@@ -22,6 +24,21 @@ const StyledModal = styled.div`
     box-shadow: var(--shadow-lg);
     padding: 3.2rem 4rem;
     transition: all 0.5s;
+    /* width: min(88rem, 85vw); */
+
+    ${medias.laptop} {
+        max-width: 77rem;
+        /* padding: 0rem 0rem; */
+    }
+    &::-webkit-scrollbar {
+        width: 0 !important;
+    }
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    ${medias.tablet} {
+        padding: 3.6rem 2.4rem;
+    }
 `;
 
 const Overlay = styled.div`
@@ -30,6 +47,7 @@ const Overlay = styled.div`
     left: 0;
     width: 100%;
     height: 100vh;
+    height: 100dvh;
     background-color: var(--backdrop-color);
     backdrop-filter: blur(4px);
     z-index: 1100;
@@ -39,7 +57,7 @@ const Overlay = styled.div`
 const Button = styled.button`
     background: none;
     border: none;
-    padding: 0.4rem;
+    padding: 0.8rem;
     border-radius: var(--border-radius-sm);
     transform: translateX(0.8rem);
     transition: all 0.2s;
@@ -103,6 +121,7 @@ interface WindowProps {
 function Window({ name, children }: WindowProps) {
     const { close, openName } = useModal();
     const ref = useOutsideClick<HTMLDivElement>(close, true);
+    useLockBodyScroll(name === openName);
     if (name !== openName) return null;
     return createPortal(
         <Overlay>

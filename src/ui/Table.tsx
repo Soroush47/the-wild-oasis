@@ -1,7 +1,15 @@
 import { createContext, ReactNode, useContext } from "react";
 import styled from "styled-components";
 
+const TableContainer = styled.div`
+    overflow-x: auto;
+    width: 100%;
+
+    -webkit-overflow-scrolling: touch;
+`;
+
 const StyledTable = styled.div`
+    min-width: 90rem;
     border: 1px solid var(--color-grey-200);
 
     font-size: 1.4rem;
@@ -78,7 +86,9 @@ const TableContext = createContext<TableContextType | undefined>(undefined);
 function Table({ columns, children }: TableProps) {
     return (
         <TableContext.Provider value={{ columns }}>
-            <StyledTable role="table">{children}</StyledTable>
+            <TableContainer>
+                <StyledTable role="table">{children}</StyledTable>
+            </TableContainer>
         </TableContext.Provider>
     );
 }

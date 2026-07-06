@@ -31,7 +31,7 @@ const StyledSidebar = styled.aside<StyledSidebarProps>`
         top: 0;
         left: 0;
 
-        width: 26rem;
+        width: 24rem;
         height: 100dvh;
 
         z-index: 1000;
@@ -40,6 +40,12 @@ const StyledSidebar = styled.aside<StyledSidebarProps>`
 
         /* transition: transform 0.3s ease; */
         transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+
+        &::-webkit-scrollbar {
+            width: 0 !important;
+        }
+        scrollbar-width: none;
+        -ms-overflow-style: none;
     }
 `;
 

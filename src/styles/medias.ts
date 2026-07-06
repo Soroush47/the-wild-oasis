@@ -7,4 +7,6 @@ export const medias = {
 
     // Only for stats
     statsMobile: "@media (max-width:520px)",
+
+    smallMobile: "@media (max-width:360px)",
 };

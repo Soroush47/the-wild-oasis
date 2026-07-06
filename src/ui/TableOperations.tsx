@@ -7,11 +7,14 @@ const TableOperations = styled.div`
     gap: var(--space-4);
 
     ${medias.desktop} {
-        justify-content: space-between;
+        /* flex-direction: column; */
+        /* align-items: end; */
+        justify-content: end;
+        /* justify-content: space-between; */
     }
     ${medias.tablet} {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: end;
     }
     ${medias.mobile} {
         gap: var(--space-3);

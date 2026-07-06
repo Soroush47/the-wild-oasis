@@ -12,7 +12,7 @@ import { medias } from "../../styles/medias";
 const StyledDashboardLayout = styled.div`
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: auto 34rem auto;
+    grid-template-rows: auto 40rem auto;
     gap: 2.4rem;
 
     ${medias.wideDesktop} {

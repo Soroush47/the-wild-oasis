@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { ReactElement } from "react";
+import { medias } from "../styles/medias";
 
 const StyledFormRow = styled.div`
     display: grid;
@@ -10,7 +11,7 @@ const StyledFormRow = styled.div`
     padding: 1.2rem 0;
 
     &:first-child {
-        padding-top: 0;
+        padding-top: 1.5rem;
     }
 
     &:last-child {
@@ -26,6 +27,18 @@ const StyledFormRow = styled.div`
         justify-content: flex-end;
         gap: 1.2rem;
     }
+
+    ${medias.laptop} {
+        grid-template-columns: 24rem 0.4fr;
+        /* padding-right: 2.4rem; */
+        gap: 0.6rem;
+    }
+    ${medias.tablet} {
+        grid-template-columns: 20rem 0.4fr;
+    }
+    ${medias.mobile} {
+        grid-template-columns: 1fr;
+    }
 `;
 
 const Label = styled.label`
@@ -35,6 +48,9 @@ const Label = styled.label`
 const Error = styled.span`
     font-size: 1.4rem;
     color: var(--color-red-700);
+    ${medias.laptop} {
+        font-size: 1.2rem;
+    }
 `;
 
 interface FormRowProps {
@@ -46,7 +62,7 @@ interface FormRowProps {
 function FormRow({ error = "", label = "", children }: FormRowProps) {
     return (
         <StyledFormRow>
-            {label && <Label htmlFor={children.props.id}>{label}</Label>}
+            {label && <Label htmlFor={children?.props?.id}>{label}</Label>}
             {children}
             {error && <Error>{error}</Error>}
         </StyledFormRow>

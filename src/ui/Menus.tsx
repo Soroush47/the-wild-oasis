@@ -14,6 +14,7 @@ import {
 import { HiEllipsisVertical } from "react-icons/hi2";
 import { createPortal } from "react-dom";
 import { useOutsideClick } from "../hooks/useOutsideClick";
+import { medias } from "../styles/medias";
 
 const Menu = styled.div`
     display: flex;
@@ -24,7 +25,7 @@ const Menu = styled.div`
 const StyledToggle = styled.button`
     background: none;
     border: none;
-    padding: 0.4rem;
+    padding: 0.8rem;
     border-radius: var(--border-radius-sm);
     transform: translateX(0.8rem);
     transition: all 0.2s;
@@ -52,6 +53,8 @@ const StyledList = styled.ul<StyledListProps>`
 
     right: ${props => props.$position?.x}px;
     top: ${props => props.$position?.y}px;
+
+    min-width: 18rem;
 `;
 
 const StyledButton = styled.button`
@@ -76,6 +79,10 @@ const StyledButton = styled.button`
         height: 1.6rem;
         color: var(--color-grey-400);
         transition: all 0.3s;
+    }
+
+    ${medias.mobile} {
+        padding: 1.2rem 1.6rem;
     }
 `;
 
@@ -148,7 +155,7 @@ function Toggle({ id, itemCount = 3 }: ToggleProps) {
 
         if (!rect) return null;
 
-        console.log({ toggleItemCount: itemCount });
+        // console.log({ toggleItemCount: itemCount });
         const contextMenuHeight = itemCount * 40;
         const position = {
             x: window.innerWidth - rect.left + 4,
