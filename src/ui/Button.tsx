@@ -27,6 +27,11 @@ const sizes: Record<SizeVariant, RuleSet<object>> = {
         font-size: 1.6rem;
         padding: 1.2rem 2.4rem;
         font-weight: 500;
+        ${medias.mobile} {
+            font-size: 1.5rem;
+            padding: 0.8rem 1.2rem;
+            font-weight: 500;
+        }
     `,
 };
 
