@@ -5,6 +5,7 @@ import Heading from "../ui/Heading";
 
 const LoginLayout = styled.main`
     min-height: 100vh;
+    min-height: 100dvh;
     display: grid;
     grid-template-columns: minmax(24rem, 48rem);
     align-content: center;

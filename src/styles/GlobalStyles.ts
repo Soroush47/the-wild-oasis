@@ -10,9 +10,11 @@ const GlobalStyles = createGlobalStyle`
     --space-5: 2.4rem;
     --space-6: 3.2rem;
     --space-7: 4.8rem;
-
+    
+    --color-green-300: #49ff6a;
+    --color-red-300: #ff5e5e;
   /* Grey */
-  &, &.ligh-mode{
+  &, &.light-mode{
 
     --color-grey-0: #fff;
     --color-grey-50: #f9fafb;

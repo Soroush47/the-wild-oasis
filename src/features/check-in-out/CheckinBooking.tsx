@@ -16,12 +16,19 @@ import { useEffect, useState } from "react";
 import { formatCurrency } from "../../utils/helpers";
 import { useCheckin } from "./useCheckin";
 import { useSettings } from "../settings/useSettings";
+import { medias } from "../../styles/medias";
 
 const Box = styled.div`
     background-color: var(--color-grey-0);
     border: 1px solid var(--color-grey-100);
     border-radius: var(--border-radius-md);
     padding: 2.4rem 4rem;
+    ${medias.tablet} {
+        padding: 2.4rem 3.2rem;
+    }
+    ${medias.mobile} {
+        padding: 2.4rem;
+    }
 `;
 
 function CheckinBooking() {
@@ -74,7 +81,7 @@ function CheckinBooking() {
 
     return (
         <>
-            <Row type="horizontal">
+            <Row type="horizontal" responsiveReverse>
                 <Heading as="h1">Check in booking #{bookingId}</Heading>
                 <ButtonText onClick={moveBack}>&larr; Back</ButtonText>
             </Row>

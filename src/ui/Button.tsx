@@ -75,6 +75,13 @@ const Button = styled.button<ButtonProps>`
 
     ${props => sizes[props.size ?? "medium"]}
     ${props => variations[props.$variation ?? "primary"]}
+
+    &:disabled {
+        background-color: var(--color-grey-300);
+        color: var(--color-grey-500);
+        border-color: var(--color-grey-300);
+        opacity: 0.6;
+    }
 `;
 
 // Button.defaultProps = {
