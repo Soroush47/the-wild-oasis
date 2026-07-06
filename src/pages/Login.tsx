@@ -14,10 +14,9 @@ const LoginLayout = styled.main`
     align-content: flex-start;
     background-color: var(--color-grey-50);
     padding: 4rem 10rem;
-    ${medias.mobile}{
-        padding: 4rem 6rem
-
-    };
+    ${medias.mobile} {
+        padding: 4rem;
+    }
 `;
 
 function Login() {
