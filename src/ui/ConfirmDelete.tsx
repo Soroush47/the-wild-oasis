@@ -1,9 +1,11 @@
 import styled from "styled-components";
 import Button from "./Button";
 import Heading from "./Heading";
+import { medias } from "../styles/medias";
 // import { useDeleteCabin } from "../features/cabins/useDeleteCabin";
 
 const StyledConfirmDelete = styled.div`
+    max-width: 47rem;
     width: 47rem;
     display: flex;
     flex-direction: column;
@@ -19,6 +21,21 @@ const StyledConfirmDelete = styled.div`
         justify-content: flex-end;
         gap: 1.2rem;
     }
+
+    ${medias.tablet} {
+        width: 65vw;
+    }
+
+    ${medias.smallMobile} {
+        & > div {
+            flex-direction: column-reverse;
+            padding: 0rem 5rem;
+            width: 80%;
+            min-width: 30rem;
+            align-self: center;
+            margin-top: 2rem;
+        }
+    }
 `;
 
 interface ConfirmDeleteProps {
@@ -26,22 +43,14 @@ interface ConfirmDeleteProps {
     onConfirm: () => void;
     disabled?: boolean;
     onCloseModal?: () => void;
-    // id: number;
 }
 
 function ConfirmDelete({
     resourceName,
-    // id,
     onCloseModal,
     disabled,
     onConfirm,
 }: ConfirmDeleteProps) {
-    // const handleDelete = () => {
-    //     deleteMutation(id, {
-    //         onSuccess: () => onCloseModal?.(),
-    //     });
-    // };
-
     return (
         <StyledConfirmDelete>
             <Heading as="h3">Delete {resourceName}</Heading>

@@ -14,29 +14,10 @@ import Pagination from "../../ui/Pagination";
 
 function BookingTable() {
     const { data, isLoading } = useBookings();
-    // const [searchParams] = useSearchParams();
-
-    // const status = searchParams.get("status") || "all";
-    // const sortBy = searchParams.get("sortBy") || "createdAt-asc";
-    // const [field, direction] = sortBy?.split("-") as [Field, Direction];
-    // const modifier = direction === "asc" ? 1 : -1;
 
     const bookings = data?.data.bookings ?? [];
     const count = data?.data.count ?? 0;
 
-    // const sortedBookings =
-    //     sortBy === "createdAt-asc"
-    //         ? [...bookings]
-    //         : [...bookings].sort(
-    //               (a, b) =>
-    //                   (Number(new Date(a[field])) - Number(new Date(b[field]))) *
-    //                   modifier,
-    //           );
-
-    // const filteredBookings =
-    //     status === "all"
-    //         ? [...sortedBookings]
-    //         : sortedBookings.filter((booking: BookingType) => booking.status === status);
     if (isLoading) return <Spinner />;
     if (!bookings?.length) return <Empty resourceName="bookings" />;
 
