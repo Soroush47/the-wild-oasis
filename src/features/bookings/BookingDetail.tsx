@@ -52,7 +52,7 @@ function BookingDetail() {
 
     return (
         <>
-            <Row type="horizontal" responsiveReverse>
+            <Row type="horizontal" $responsiveReverse>
                 <HeadingGroup>
                     <Heading as="h1">Booking #{id}</Heading>
                     <Tag type={statusToTagName[status]}>{status.replace("-", " ")}</Tag>
