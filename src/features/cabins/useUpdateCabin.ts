@@ -1,6 +1,8 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateCabin } from "../../services/apiCabins";
 import toast from "react-hot-toast";
+import { AxiosError } from "axios";
+import { handleMutationError } from "../../utils/handlerMutationError";
 
 export function useUpdateCabin() {
     const queryClient = useQueryClient();
@@ -12,7 +14,8 @@ export function useUpdateCabin() {
                 queryKey: ["cabins"],
             });
         },
-        onError: () => toast.error("The cabin could not be edited"),
+        onError: (error: AxiosError) =>
+            handleMutationError(error, "The cabin could not be edited"),
     });
 
     return { isUpdating, updateMutation };

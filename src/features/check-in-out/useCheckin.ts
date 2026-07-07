@@ -2,6 +2,8 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateBooking } from "../../services/apiBookings";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { AxiosError } from "axios";
+import { handleMutationError } from "../../utils/handlerMutationError";
 
 type Breakfast = null | { hasBreakfast: true; extrasPrice: number; totalPrice: number };
 
@@ -42,7 +44,8 @@ export function useCheckin() {
             });
             naviagate("/");
         },
-        onError: () => toast.error("The booking could not be check in"),
+        onError: (error: AxiosError) =>
+            handleMutationError(error, "The booking could not be check in"),
     });
 
     return { checkinMutation, isCheckingIn };

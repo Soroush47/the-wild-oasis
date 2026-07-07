@@ -1,6 +1,8 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateBooking } from "../../services/apiBookings";
 import toast from "react-hot-toast";
+import { AxiosError } from "axios";
+import { handleMutationError } from "../../utils/handlerMutationError";
 
 type Obj = {
     status: "checked-out";
@@ -22,7 +24,8 @@ export function useCheckout() {
                 // refetchType: "none",
             });
         },
-        onError: () => toast.error("The booking could not be check out"),
+        onError: (error: AxiosError) =>
+            handleMutationError(error, "The booking could not be check out"),
     });
 
     return { checkoutMutation, isCheckingOut };

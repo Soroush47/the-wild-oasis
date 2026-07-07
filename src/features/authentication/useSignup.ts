@@ -4,6 +4,7 @@ import { AxiosError } from "axios";
 import toast from "react-hot-toast";
 
 import { signupUser } from "../../services/apiAuth";
+import { handleMutationError } from "../../utils/handlerMutationError";
 
 interface BackendError {
     message: string;
@@ -25,8 +26,7 @@ export function useSignup() {
             const axiosError = error as AxiosError<BackendError>;
             const message =
                 axiosError.response?.data?.message || "User could not sign up";
-
-            toast.error(message);
+            handleMutationError(axiosError, message);
         },
     });
 

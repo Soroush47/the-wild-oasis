@@ -10,7 +10,7 @@ const LoginLayout = styled.main`
     display: grid;
     grid-template-columns: minmax(24rem, 48rem);
     justify-content: center;
-    gap: 4rem;
+    gap: 2rem;
     align-content: flex-start;
     background-color: var(--color-grey-50);
     padding: 6rem 10rem;

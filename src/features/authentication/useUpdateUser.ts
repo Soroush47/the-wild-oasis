@@ -1,6 +1,8 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateUser } from "../../services/apiAuth";
 import toast from "react-hot-toast";
+import { AxiosError } from "axios";
+import { handleMutationError } from "../../utils/handlerMutationError";
 
 export function useUpdateUser() {
     const queryClient = useQueryClient();
@@ -12,9 +14,8 @@ export function useUpdateUser() {
             });
             toast.success("Account updated successfully");
         },
-        onError: () => {
-            toast.error("Account could not update");
-        },
+        onError: (error: AxiosError) =>
+            handleMutationError(error, "Account could not update"),
     });
 
     return { updateUserMutation, isUpdating };

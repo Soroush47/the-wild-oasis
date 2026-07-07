@@ -28,7 +28,7 @@ function SidebarProvider({ children }: SidebarProviderProps) {
         setIsSidebarOpen(true);
     }, []);
     const closeSidebar = useCallback(() => {
-        console.log("close sidebar");
+        // console.log("close sidebar");
         setIsSidebarOpen(false);
     }, []);
     const toggleSidebar = useCallback(() => {

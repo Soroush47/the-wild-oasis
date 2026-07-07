@@ -3,8 +3,8 @@ import { medias } from "../styles/medias";
 
 interface RowProps {
     type?: "horizontal" | "vertical";
-    responsive?: boolean;
-    responsiveReverse?: boolean;
+    $responsive?: boolean;
+    $responsiveReverse?: boolean;
 }
 
 const Row = styled.div<RowProps>`
@@ -22,8 +22,8 @@ const Row = styled.div<RowProps>`
             flex-direction: column;
             gap: var(--space-4);
         `}
-    ${({ responsive }) =>
-        responsive &&
+    ${({ $responsive }) =>
+        $responsive &&
         css`
             ${medias.desktop} {
                 flex-direction: column;
@@ -31,8 +31,8 @@ const Row = styled.div<RowProps>`
                 gap: var(--space-4);
             }
         `}
-    ${({ responsiveReverse }) =>
-        responsiveReverse &&
+    ${({ $responsiveReverse }) =>
+        $responsiveReverse &&
         css`
             ${medias.desktop} {
                 flex-direction: column-reverse;

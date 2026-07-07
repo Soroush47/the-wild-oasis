@@ -26,6 +26,12 @@ const StyledSidebar = styled.aside<StyledSidebarProps>`
     overflow-y: auto;
     overflow-x: hidden;
 
+    &::-webkit-scrollbar {
+        width: 0 !important;
+    }
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
     ${medias.laptop} {
         position: fixed;
         top: 0;
@@ -40,12 +46,6 @@ const StyledSidebar = styled.aside<StyledSidebarProps>`
 
         /* transition: transform 0.3s ease; */
         transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-
-        &::-webkit-scrollbar {  
-            width: 0 !important;
-        }
-        scrollbar-width: none;
-        -ms-overflow-style: none;
     }
 `;
 
@@ -56,7 +56,7 @@ function Sidebar() {
 
     useEffect(() => {
         closeSidebar();
-        console.log("location changed");
+        // console.log("location changed");
     }, [location.pathname, closeSidebar]);
 
     useEffect(() => {

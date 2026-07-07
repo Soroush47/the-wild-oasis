@@ -1,6 +1,8 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteCabin } from "../../services/apiCabins";
 import toast from "react-hot-toast";
+import { AxiosError } from "axios";
+import { handleMutationError } from "../../utils/handlerMutationError";
 
 export function useDeleteCabin() {
     const queryClient = useQueryClient();
@@ -13,7 +15,8 @@ export function useDeleteCabin() {
                 queryKey: ["cabins"],
             });
         },
-        onError: () => toast.error("Cabin could not be deleted"),
+        onError: (error: AxiosError) =>
+            handleMutationError(error, "Cabin could not be deleted"),
     });
 
     return { isDeleting, deleteMutation };

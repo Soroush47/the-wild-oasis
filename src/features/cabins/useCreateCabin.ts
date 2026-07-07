@@ -1,6 +1,8 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { createCabin } from "../../services/apiCabins";
+import { AxiosError } from "axios";
+import { handleMutationError } from "../../utils/handlerMutationError";
 
 export function useCreateCabin() {
     const queryClient = useQueryClient();
@@ -12,7 +14,8 @@ export function useCreateCabin() {
                 queryKey: ["cabins"],
             });
         },
-        onError: () => toast.error("Cabin could not be created"),
+        onError: (error: AxiosError) =>
+            handleMutationError(error, "Cabin could not be created"),
     });
 
     return { isCreating, createMutation };

@@ -6,7 +6,7 @@ import Row from "../ui/Row";
 function Bookings() {
     return (
         <>
-            <Row type="horizontal" responsive>
+            <Row type="horizontal" $responsive>
                 <Heading as="h1">All bookings</Heading>
                 <BookingTableOperations />
             </Row>

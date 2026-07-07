@@ -1,6 +1,8 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteBooking } from "../../services/apiBookings";
 import toast from "react-hot-toast";
+import { AxiosError } from "axios";
+import { handleMutationError } from "../../utils/handlerMutationError";
 
 export function useDeleteBooking() {
     const queryClient = useQueryClient();
@@ -13,7 +15,8 @@ export function useDeleteBooking() {
                 queryKey: ["bookings"],
             });
         },
-        onError: () => toast.error("Booking could not be deleted"),
+        onError: (error: AxiosError) =>
+            handleMutationError(error, "Booking could not be deleted"),
     });
 
     return { isDeleting, deleteMutation };

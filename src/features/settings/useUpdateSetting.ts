@@ -1,6 +1,8 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateSetting } from "../../services/apiSettings";
 import toast from "react-hot-toast";
+import { handleMutationError } from "../../utils/handlerMutationError";
+import { AxiosError } from "axios";
 
 export function useUpdateSetting() {
     const queryClient = useQueryClient();
@@ -12,9 +14,8 @@ export function useUpdateSetting() {
                 queryKey: ["settings"],
             });
         },
-        onError: () => {
-            toast.error("Settings could not update");
-        },
+        onError: (error: AxiosError) =>
+            handleMutationError(error, "Settings could not update"),
     });
 
     return { isUpdating, updateMutation };
