@@ -23,16 +23,16 @@ function CreateCabinForm({ cabin, onCloseModal }: CreateCabinFormProps) {
     const { isCreating, createMutation } = useCreateCabin();
     const { isUpdating, updateMutation } = useUpdateCabin();
 
-    const onSubmit = (data: FormData) => {
+    const onSubmit = async (data: FormData) => {
         cabin
             ? updateMutation(
                   {
                       ...data,
                       id: cabin.id,
-                      image:
-                          data.image?.length && typeof data.image !== "string"
-                              ? `/src/data/cabins/${data.image.item(0)?.name}`
-                              : cabin.image,
+                      //   image: imageUrl,
+                      //   data.image?.length && typeof data.image !== "string"
+                      //       ? data.image?.item(0)
+                      //       : cabin.image,
                   },
                   { onSuccess: () => onCloseModal?.() },
               )

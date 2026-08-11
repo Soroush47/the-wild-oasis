@@ -1,4 +1,5 @@
 import api from "../configs/api";
+import { uploadImage } from "./apiCloudinary";
 
 interface User {
     fullName: string;
@@ -46,9 +47,19 @@ export const logout = async () => {
 };
 
 export const updateUser = async (newUser: Partial<User>) => {
-    const response = await api.patch(`/auth/update/${newUser.id}`, newUser);
-    const updatedUser = response.data;
-    
-    localStorage.setItem("user", JSON.stringify(updatedUser));
-    return updatedUser;
+    let avatarUrl = newUser.avatar;
+
+    if (newUser.avatar instanceof File) {
+        avatarUrl = await uploadImage(newUser.avatar);
+    }
+
+    const updatedUser = {
+        ...newUser,
+        avatar: avatarUrl,
+    };
+    const response = await api.patch(`/auth/update/${newUser.id}`, updatedUser);
+    const updatedUserData = response.data;
+
+    localStorage.setItem("user", JSON.stringify(updatedUserData));
+    return updatedUserData;
 };

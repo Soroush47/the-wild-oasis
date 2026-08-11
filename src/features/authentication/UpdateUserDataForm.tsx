@@ -16,7 +16,7 @@ function UpdateUserDataForm() {
     const { updateUserMutation, isUpdating } = useUpdateUser();
 
     const [fullName, setFullName] = useState(currentFullName);
-    const [avatar, setAvatar] = useState<File | null | string>(null);
+    const [avatar, setAvatar] = useState<File | null>(null);
 
     function handleReset() {
         setFullName(currentFullName);
@@ -26,12 +26,12 @@ function UpdateUserDataForm() {
     function handleSubmit(e: FormEvent) {
         e.preventDefault();
 
-        const hasChanged = fullName !== currentFullName || avatar !== currentAvatar;
+        const hasChanged = fullName !== currentFullName || avatar !== null;
 
         if (!hasChanged) return;
 
         updateUserMutation(
-            { id, fullName, avatar },
+            { id, fullName, avatar: avatar ?? currentAvatar },
             {
                 onError: () => handleReset(),
                 onSuccess: () => {
@@ -40,10 +40,10 @@ function UpdateUserDataForm() {
                 },
             },
         );
-        console.log({ id, fullName, avatar });
+        // console.log({ id, fullName, avatar });
     }
 
-    console.log(avatar);
+    // console.log(avatar);
 
     return (
         <Form onSubmit={handleSubmit}>

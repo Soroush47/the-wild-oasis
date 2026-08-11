@@ -50,7 +50,7 @@ function CabinTable() {
               );
 
     const firstItem = (currentPage - 1) * PAGE_SIZE;
-    console.log({ firstItem, currentPage });
+    // console.log({ firstItem, currentPage });
     const showCabins = filteredCabins.slice(firstItem, firstItem + PAGE_SIZE);
 
     if (isLoading) return <Spinner />;
