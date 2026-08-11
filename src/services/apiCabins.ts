@@ -11,7 +11,7 @@ export async function getCabins() {
 
 export async function deleteCabin(id: number) {
     const res = await api.delete(`/cabins/${id}`);
-    console.log(res.data);
+    // console.log(res.data);
     return res;
 }
 
@@ -30,6 +30,7 @@ export async function createCabin(cabin: Cabin) {
     const date = format(new Date(), "yyyy/MM/dd HH:mm:ss"); //HH:24 , hh:12
     cabin.createdAt = date;
     let imageUrl =
+        cabin.image ||
         "https://res.cloudinary.com/fz1k9jxz/image/upload/v1786396516/empty2.png";
 
     if (cabin.image && typeof cabin.image !== "string") {

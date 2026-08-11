@@ -75,13 +75,13 @@ function CabinRow({ cabin }: CabinRowProps) {
             regularPrice,
             discount,
             description,
-            image: image.slice(16),
+            image: image,
         });
     };
 
     return (
         <Table.Row>
-            <Img src={image} />
+            <Img src={typeof image === "string" ? image : undefined} />
             <Cabin>{name}</Cabin>
             <div>Fits up to {maxCapacity} guests</div>
             <Price>{formatCurrency(regularPrice)}</Price>
